@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeSize : MonoBehaviour
 {
-    public MeshRenderer meshRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
