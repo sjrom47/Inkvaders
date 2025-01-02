@@ -6,10 +6,13 @@ using System;
 
 public class PaintManager : Singleton<PaintManager>
 {
+    ColorCounter colorCounter;
+    List<PaintedSurface> allPaintedSurfaces = new List<PaintedSurface>();
     // Start is called before the first frame update
     void Start()
     {
-        
+        colorCounter= new ColorCounter();
+        StartCoroutine("PaintPercentageCorroutine");
     }
 
     // Update is called once per frame
@@ -18,13 +21,53 @@ public class PaintManager : Singleton<PaintManager>
         
     }
 
+    private IEnumerator PaintPercentageCorroutine()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var colorCounts = GetAllColorCounts();
+            foreach (var color in colorCounts)
+            {
+                Debug.Log(color);
+            }
+            yield return new WaitForSeconds(3f);
+        }
+    }
+
+    private Dictionary<Color,int> GetAllColorCounts()
+    {
+        Dictionary<Color,int> cumulativeResults = new Dictionary<Color,int>();
+        foreach (PaintedSurface surface in allPaintedSurfaces)
+        {
+            var surfaceResult = colorCounter.CountColorsInTexture(surface.GetFloorTexture());
+            foreach (var color in surfaceResult.Keys)
+            {
+                if (cumulativeResults.ContainsKey(color))
+                {
+                    cumulativeResults[color] += surfaceResult[color];
+                }
+                else
+                {
+                    cumulativeResults[color]= surfaceResult[color];
+                }
+            }
+        }
+        return cumulativeResults;
+
+    }
+
     private void OnGameEnd()
     {
         // TODO: create the event to calculate the amount of paint of each team and notify the GameManager
+        Dictionary<Color, int> colorCounts = GetAllColorCounts();
     }
 
     public void PaintSurface(PaintedSurface surface, Vector3 pos, Vector3 normalVector,float radius, Color paintColor)
     {
+        if (!allPaintedSurfaces.Contains(surface))
+        {
+            allPaintedSurfaces.Add(surface);
+        }
         Vector2 collisionPoint = FindCollisionPoint(pos,normalVector);
         if (collisionPoint != null)
         {
