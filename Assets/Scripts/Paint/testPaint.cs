@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testPaint : MonoBehaviour
+public class testPaintold : MonoBehaviour
 {
     // Start is called before the first frame update
     private Texture2D floorTexture;
+    int maskTextureID = Shader.PropertyToID("_Premade_mask");
+    //RenderTexture maskRenderTexture;
+    int TEXTURE_SIZE = 1024;
+    Renderer renderer;
     void Start()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        Material material = GetComponent<Material>();
-        floorTexture = (Texture2D)material.GetTexture("_Premade_Mask");
+        renderer = GetComponent<Renderer>();
+        Material material = renderer.material;
+        //maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
+        //maskRenderTexture.filterMode = FilterMode.Bilinear;
+        //renderer.material.SetTexture(maskTextureID, maskRenderTexture);
     }
 
     // Update is called once per frame
@@ -22,7 +28,13 @@ public class testPaint : MonoBehaviour
             for (int i = 0; i < carray.Length; i++) {
                 carray[i] = Color.red;
             }
+            floorTexture = (Texture2D)renderer.material.GetTexture(maskTextureID);
             floorTexture.SetPixels(100, 100, 1000, 1000,carray);
         }
     }
+
+    //    private void OnDisable()
+    //    {
+    //        maskRenderTexture.Release();
+    //    }
 }
