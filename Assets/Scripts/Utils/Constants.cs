@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class Constants 
 {
-    public static int TEXTURE_SIZE = 2048;
+    public static int VERTICAL_TEXTURE_SIZE = 1024;
+    public static int HORIZONTAL_TEXTURE_SIZE = 576;
+    public static float MAX_VERTICAL_DISTANCE_COLLISION = 100f;
 }

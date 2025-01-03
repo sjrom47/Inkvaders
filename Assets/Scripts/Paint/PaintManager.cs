@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.Rendering;
+using static UnityEditor.PlayerSettings;
 
-
-public class PaintManager : Singleton<PaintManager>
+// TODO: see if this should be a monobehaviour Singleton or a regular singleton
+public class PaintManager : MonoBehaviourSingleton<PaintManager>
 {
     ColorCounter colorCounter;
-    List<PaintedSurface> allPaintedSurfaces = new List<PaintedSurface>();
-    // Start is called before the first frame update
-    void Start()
+    List<PaintedSurface> allPaintedSurfaces;
+    public CollisionHandler collisionHandler;
+    void Awake()
     {
-        colorCounter= new ColorCounter();
-        StartCoroutine("PaintPercentageCorroutine");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        colorCounter = new ColorCounter();
+        allPaintedSurfaces = new List<PaintedSurface>();
+        // TODO: see if this should be a singleton a static class or something else
+        collisionHandler = CollisionHandler.Instance();
         
     }
+
+    
 
     private IEnumerator PaintPercentageCorroutine()
     {
@@ -62,55 +64,94 @@ public class PaintManager : Singleton<PaintManager>
         Dictionary<Color, int> colorCounts = GetAllColorCounts();
     }
 
+    
+
     public void PaintSurface(PaintedSurface surface, Vector3 pos, Vector3 normalVector,float radius, Color paintColor)
     {
+         // TODO: clean this function up
         if (!allPaintedSurfaces.Contains(surface))
         {
             allPaintedSurfaces.Add(surface);
         }
-        Vector2 collisionPoint = FindCollisionPoint(pos,normalVector);
+        Vector2 collisionPoint = collisionHandler.FindTextureCollisionPoint(pos, -normalVector);
         if (collisionPoint != null)
         {
-            Vector2 pixelCoords = new Vector2((float)Math.Round(Constants.TEXTURE_SIZE*collisionPoint.x,0),(float)Math.Round(Constants.TEXTURE_SIZE*collisionPoint.y));
-            int pixelRadius = (int)Math.Round(radius,0);
-            Color[] colorGrid = new Color[2*pixelRadius*4*pixelRadius];
-            for (int i = 0; i < colorGrid.Length; i++)
-            {
-                colorGrid[i] = paintColor;
-            }
+            Vector2 pixelCoords = collisionHandler.GetPixelCoords(collisionPoint);
             Texture2D floorTexture = surface.GetFloorTexture();
-            floorTexture.SetPixels((int)pixelCoords.x-pixelRadius, (int)pixelCoords.y -  pixelRadius, 2*pixelRadius, 2*pixelRadius, colorGrid);
+            int width = floorTexture.width;
+            int height = floorTexture.height;
+            Color[] colors = floorTexture.GetPixels();
+            int pixelRadius = (int)Math.Round(radius,0);
+            int radiusSquared = pixelRadius*pixelRadius;
+            int minX = Mathf.Min((int)pixelCoords.x - pixelRadius);
+            int maxX = Mathf.Max((int)pixelCoords.x + pixelRadius);
+            int minY = Mathf.Min((int)pixelCoords.y - pixelRadius);
+            int maxY = Mathf.Max((int)pixelCoords.y + pixelRadius);
+            int centerX = (int)pixelCoords.x;
+            int centerY = (int)pixelCoords.y;
+            for (int y = minY; y <= maxY; y++)
+            {
+                float dy = y - centerY;
+                float dySquared = dy * dy;
+
+                for (int x = minX; x <= maxX; x++)
+                {
+                    float dx = x - centerX;
+                    // Check if point is within circle using distance formula
+                    if (dx * dx + dySquared <= radiusSquared)
+                    {
+                        colors[y * width + x] = paintColor;
+                    }
+                }
+            }
+
+            // Apply all pixels at once
+            floorTexture.SetPixels(colors);
+            //Color[] colorGrid = new Color[2*pixelRadius*4*pixelRadius];
+            //for (int i = 0; i < colorGrid.Length; i++)
+            //{
+            //    colorGrid[i] = paintColor;
+            //}
+            //Texture2D floorTexture = surface.GetFloorTexture();
+            //floorTexture.SetPixels((int)pixelCoords.x-pixelRadius, (int)pixelCoords.y -  pixelRadius, 2*pixelRadius, 2*pixelRadius, colorGrid);
             floorTexture.Apply(); // Apply changes to the texture
 
             // Update the material with the new texture (if needed)
-            Material material = surface.SurfaceRenderer.material;
-            material.SetTexture("_Premade_mask", floorTexture);
+            //Material material = surface.SurfaceRenderer.material;
+            //material.SetTexture("_Premade_mask", floorTexture);
 
         }
     }
-    Vector2 FindCollisionPoint(Vector3 collisionPoint, Vector3 surfaceNormal)
+
+    public Color GetColorOfFloor(Vector3 position)
     {
-        //// Get the point of collision from the particle or object
-        //Vector3 collisionPoint = collision.contacts[0].point;
-
-        //// Get the surface normal at the collision point
-        //Vector3 surfaceNormal = collision.contacts[0].normal;
-
-        // Cast a ray from the collision point in the direction of the surface normal
-        Ray ray = new Ray(collisionPoint, -surfaceNormal);  // Assuming we want to cast the ray downwards (into the ground)
-
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        RaycastResult collision = collisionHandler.FindCollisionPoint(position, Vector3.down);
+        if (collisionHandler.CollisionIsTexture(collision))
         {
-            // Get the texture coordinates at the hit point on the mesh
-            Vector2 textureCoords = hit.textureCoord;
-
-            // Output the texture coordinates
             
-            return textureCoords;
-            // Optionally, you can use these texture coordinates to interact with the texture
+            PaintedSurface surface = collision.Hit.collider.GetComponent<PaintedSurface>();
+            if (surface != null)
+            {
+                Vector2 collisionPoint = collision.Hit.textureCoord;
+                
+                Vector2 pixelCoords = collisionHandler.GetPixelCoords(collisionPoint);
+                Texture2D floorTexture = surface.GetFloorTexture();
+                Color pixelColor = floorTexture.GetPixel((int)pixelCoords.x, (int)pixelCoords.y);
+                //Color[] carray = new Color[400];
+                //for (int i = 0; i < carray.Length; i++)
+                //{
+                //    carray[i] = Color.red;
+                //}
+                //floorTexture.SetPixels((int)pixelCoords.x-10, (int)pixelCoords.y-10,20,20, carray);
+                //floorTexture.Apply();
+                return pixelColor;
+            }
         }
-        return Vector2.zero;
+        
+
+
+        return Color.black;
     }
+    
 }
 

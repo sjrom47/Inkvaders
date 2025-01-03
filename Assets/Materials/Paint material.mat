@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Original_texture:
-        m_Texture: {fileID: 2800000, guid: f7edb1799be04084682472d5799c25cb, type: 3}
+        m_Texture: {fileID: 2800000, guid: b6db9559c6ed79447b14eea4182731a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Premade_mask:
@@ -54,5 +54,5 @@ Material:
     - _Smoothness: 0.2
     m_Colors:
     - _Base_Color: {r: 1, g: 0.5394965, b: 0, a: 0}
-    - _Main_Texture_Tiling: {r: 0, g: 0, b: 0, a: 0}
+    - _Main_Texture_Tiling: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

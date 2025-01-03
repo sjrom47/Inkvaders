@@ -1,23 +1,22 @@
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Singleton<T> :  MonoBehaviour where T: MonoBehaviour
+
+public class Singleton<T> where T : new()
 {
+    // We implement the singleton as a generic class
     private static T instance;
 
     public static T Instance()
     {
         if (instance == null)
         {
-            instance = GameObject.FindObjectOfType<T>();
-            if (instance == null)
-            {
-                var singletonObj = new GameObject();
-                singletonObj.name = typeof(T).ToString();
-                instance = singletonObj.AddComponent<T>();
-            }
+            instance = new T();
         }
         return instance;
     }
 }
+

@@ -7,15 +7,15 @@ public class PaintedSurface : MonoBehaviour
     public Renderer SurfaceRenderer { get; set; }
 
 
-    void Start()
+    void Awake()
     {
         SurfaceRenderer = GetComponent<Renderer>();
 
         // Create a new Texture2D at runtime
-        floorTexture = new Texture2D(Constants.TEXTURE_SIZE, Constants.TEXTURE_SIZE, TextureFormat.RGBA32, false);
+        floorTexture = new Texture2D(Constants.HORIZONTAL_TEXTURE_SIZE, Constants.VERTICAL_TEXTURE_SIZE, TextureFormat.RGBA32, false);
 
         // Initialize the texture with a default color (e.g., white)
-        Color[] initialColors = new Color[Constants.TEXTURE_SIZE * Constants.TEXTURE_SIZE];
+        Color[] initialColors = new Color[Constants.HORIZONTAL_TEXTURE_SIZE * Constants.VERTICAL_TEXTURE_SIZE];
         for (int i = 0; i < initialColors.Length; i++)
         {
             initialColors[i] = Color.black; // Set the whole texture to white initially
