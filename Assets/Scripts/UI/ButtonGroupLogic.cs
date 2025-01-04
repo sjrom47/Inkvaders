@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,10 @@ public class ButtonGroupLogic : MonoBehaviour
         SelectButton(index);
     }
 
+    string GetButtonText(int index)
+    {
+        return buttons[index].GetComponentInChildren<TextMeshProUGUI>().text;
+    }
     void SelectButton(int index)
     {
         // Deselect the previously selected button
