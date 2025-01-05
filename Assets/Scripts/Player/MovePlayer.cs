@@ -6,7 +6,7 @@ using UnityEngine;
 public class MovePlayer : MonoBehaviour
 {
     //Speed of the object
-    private const float MOVE_STEP_DISTANCE = 1f;
+    private const float MOVE_STEP_DISTANCE = 0.01f;
 
     //These methods will be executed by their own command
     public void MoveForward()

@@ -4,49 +4,65 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float horizontalStraightMovementInput;
-    public float horizontalSideMovementInput;
-    public float verticalMovementInput;
 
-    public MovePlayer movePlayer;
-    public MoveForwardCommand moveForwardCommand;
-    public MoveBackwardCommand moveBackwardCommand;
-    public TurnRightCommand turnRightCommand;
-    public TurnLeftCommand turnLeftCommand;
-    public JumpCommand jumpCommand;
+    //[SerializeField] private GameObject player;
+    //[SerializeField] private GameObject playerHitbox;
+    //[SerializeField] private GameObject squid;
+    //[SerializeField] private GameObject squidHitbox;
+    float horizontalStraightMovementInput;
+    float horizontalSideMovementInput;
+    //float verticalMovementInput;
+
+    MovePlayer movePlayer;
+    MoveForwardCommand moveForwardCommand;
+    MoveBackwardCommand moveBackwardCommand;
+    TurnRightCommand turnRightCommand;
+    TurnLeftCommand turnLeftCommand;
+    //JumpCommand jumpCommand;
+    SquidTransformCommand squidTransformCommand;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         movePlayer = GetComponent<MovePlayer>();
         moveForwardCommand = new MoveForwardCommand(movePlayer);
         moveBackwardCommand = new MoveBackwardCommand(movePlayer);
         turnRightCommand = new TurnRightCommand(movePlayer);
         turnLeftCommand = new TurnLeftCommand(movePlayer);
-        jumpCommand = new JumpCommand(movePlayer);
+        //jumpCommand = new JumpCommand(movePlayer);
+        GameObject player = transform.Find("JellyFishGirl").gameObject;
+        GameObject playerHitbox = transform.Find("CharacterHitbox").gameObject;
+        GameObject squid = transform.Find("Squid_LOD2").gameObject;
+        GameObject squidHitbox = transform.Find("SquidHitbox").gameObject;
+        if (player == null || playerHitbox == null || squid == null || squidHitbox == null)
+        {
+            Debug.LogError("One or more GameObjects not found in hierarchy!", this);
+            return;
+        }
+        squidTransformCommand = new SquidTransformCommand(player,playerHitbox,squid,squidHitbox);
 
-        GeneralResetSquidTransformation();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckInput();
-        ApplyMovement();
+        //CheckInput();
+        //ApplyMovement();
     }
 
-    void CheckInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GeneralFlipSquidTransormation();
-        }
-        horizontalStraightMovementInput = Input.GetAxis("Vertical");
-        horizontalSideMovementInput = Input.GetAxis("Horizontal");
-        verticalMovementInput = Input.GetAxis("Jump");
-    }
+    //void CheckInput()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Q))
+    //    {
+    //        GeneralFlipSquidTransormation();
+    //    }
+    //    horizontalStraightMovementInput = Input.GetAxis("Vertical");
+    //    horizontalSideMovementInput = Input.GetAxis("Horizontal");
+    //    verticalMovementInput = Input.GetAxis("Jump");
+    //}
 
-    void ApplyMovement()
+    public void ApplyMovement(float horizontalStraightMovementInput, float horizontalSideMovementInput)
     {
         if (horizontalStraightMovementInput < 0)
         {
@@ -59,7 +75,7 @@ public class PlayerController : MonoBehaviour
             moveForwardCommand.Execute(); 
         }
 
-        if (horizontalSideMovementInput < 0) 
+        else if (horizontalSideMovementInput < 0) 
         { 
             turnLeftCommand.Execute(); 
         }
@@ -68,35 +84,25 @@ public class PlayerController : MonoBehaviour
             turnRightCommand.Execute(); 
         }
 
-        if (verticalMovementInput > 0)
-        {
-            jumpCommand.Execute();
-        }
+        //if (verticalMovementInput > 0)
+        //{
+        //    jumpCommand.Execute();
+        //}
     }
 
     // Reset the logic of the Player state
-    void GeneralResetSquidTransformation()
-    {
-        ResetSizeSquidTrasformation();
-    }
-
-    // Flip the logic between Player and Squid state
-    void GeneralFlipSquidTransormation()
-    {
-        FlipSizeSquidTrasformation();
-    }
+    
 
     // Reset the size to the one of the Player state
-    void ResetSizeSquidTrasformation()
+
+    public void TransformIntoSquid()
     {
-        transform.Find("NormalSize").GetComponent<MeshRenderer>().enabled = true;
-        transform.Find("SmallSize").GetComponent<MeshRenderer>().enabled = false;
+        squidTransformCommand.Execute();
     }
 
-    // Flip the size between Player and Squid state
-    void FlipSizeSquidTrasformation()
+    public void EndSquidTransformation()
     {
-        transform.Find("NormalSize").GetComponent<MeshRenderer>().enabled = !transform.Find("NormalSize").GetComponent<MeshRenderer>().enabled;
-        transform.Find("SmallSize").GetComponent<MeshRenderer>().enabled = !transform.Find("SmallSize").GetComponent<MeshRenderer>().enabled;
+        squidTransformCommand.Undo();
     }
+    
 }
