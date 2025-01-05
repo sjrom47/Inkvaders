@@ -27891,11 +27891,76 @@ PrefabInstance:
       propertyPath: m_Name
       value: Splatgun
       objectReference: {fileID: 0}
+    - target: {fileID: 7935350616640258322, guid: bbf996e807a99804a90dc0883d13aeb1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbf996e807a99804a90dc0883d13aeb1, type: 3}
+--- !u!1001 &5506788392005478997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 474721996200746511, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_Name
+      value: minigun
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174685177722292461, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 217205230}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.147
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794886525009307749, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
 --- !u!1001 &6909978196243310613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27982,3 +28047,4 @@ SceneRoots:
   - {fileID: 79724725}
   - {fileID: 6909978196243310613}
   - {fileID: 1561015741399110940}
+  - {fileID: 5506788392005478997}
