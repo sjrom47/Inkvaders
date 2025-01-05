@@ -5,28 +5,47 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
 
-    public CharacterController controller;
+    [Header("Movement")]
 
-    static public float speed = 6f;
+    public float moveSpeed;    
 
-    // Start is called before the first frame update
-    void Start()
+    public Transform orientation;
+
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
+    Rigidbody rb;
+
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MyInput()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized; 
-
-        if (direction.magnitude > 0.1f)
-        {
-            controller.Move(direction * speed * Time.deltaTime);
-        }
-
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
     }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    private void Update()
+    {
+        MyInput();
+    }
+
+    private void MovePlayer()
+    {
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+    }  
 }
+
+
+
