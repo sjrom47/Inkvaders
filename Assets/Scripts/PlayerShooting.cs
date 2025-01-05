@@ -9,7 +9,6 @@ public class PlayerShooting : MonoBehaviour
     // Start is called before the first frame update
     ShootCommand shootCommand;
     [SerializeField] ParticleSystem shootingParticles;
-    [SerializeField] Transform parentController;
 
     void Start()
     {
@@ -21,7 +20,7 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
 
-        Vector3 angle = parentController.localEulerAngles;
+        //Vector3 angle = parentController.localEulerAngles;
         //input.blockRotationPlayer = Input.GetMouseButton(0);
         bool pressing = Input.GetMouseButton(0);
 
