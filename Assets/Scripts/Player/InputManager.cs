@@ -14,7 +14,15 @@ public class InputManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
+    {
+        
+        horizontalStraightMovementInput = Input.GetAxis("Vertical");
+        horizontalSideMovementInput = Input.GetAxis("Horizontal");
+        playerController.ApplyMovement(horizontalStraightMovementInput, horizontalSideMovementInput);
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -24,8 +32,5 @@ public class InputManager : MonoBehaviour
         {
             playerController.EndSquidTransformation();
         }
-        horizontalStraightMovementInput = Input.GetAxis("Vertical");
-        horizontalSideMovementInput = Input.GetAxis("Horizontal");
-        playerController.ApplyMovement(horizontalStraightMovementInput, horizontalSideMovementInput);
     }
 }

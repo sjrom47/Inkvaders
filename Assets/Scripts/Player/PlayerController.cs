@@ -2,38 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : EntityController
 {
 
     //[SerializeField] private GameObject player;
     //[SerializeField] private GameObject playerHitbox;
     //[SerializeField] private GameObject squid;
     //[SerializeField] private GameObject squidHitbox;
-    float horizontalStraightMovementInput;
-    float horizontalSideMovementInput;
-    //float verticalMovementInput;
-
-    MovePlayer movePlayer;
-    MoveForwardCommand moveForwardCommand;
-    MoveBackwardCommand moveBackwardCommand;
-    TurnRightCommand turnRightCommand;
-    TurnLeftCommand turnLeftCommand;
+    
     //JumpCommand jumpCommand;
     SquidTransformCommand squidTransformCommand;
 
     // Start is called before the first frame update
     void Awake()
     {
-        movePlayer = GetComponent<MovePlayer>();
-        moveForwardCommand = new MoveForwardCommand(movePlayer);
-        moveBackwardCommand = new MoveBackwardCommand(movePlayer);
-        turnRightCommand = new TurnRightCommand(movePlayer);
-        turnLeftCommand = new TurnLeftCommand(movePlayer);
+        base.Awake();
         //jumpCommand = new JumpCommand(movePlayer);
-        GameObject player = transform.Find("JellyFishGirl").gameObject;
-        GameObject playerHitbox = transform.Find("CharacterHitbox").gameObject;
-        GameObject squid = transform.Find("Squid_LOD2").gameObject;
-        GameObject squidHitbox = transform.Find("SquidHitbox").gameObject;
+        GameObject player = transform.Find("LookingOrientation/JellyFishGirl").gameObject;
+        GameObject playerHitbox = transform.Find("LookingOrientation/CharacterHitbox").gameObject;
+        GameObject squid = transform.Find("LookingOrientation/Squid_LOD2").gameObject;
+        GameObject squidHitbox = transform.Find("LookingOrientation/SquidHitbox").gameObject;
         if (player == null || playerHitbox == null || squid == null || squidHitbox == null)
         {
             Debug.LogError("One or more GameObjects not found in hierarchy!", this);
@@ -45,11 +33,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        //CheckInput();
-        //ApplyMovement();
-    }
+    
 
     //void CheckInput()
     //{
@@ -62,33 +46,7 @@ public class PlayerController : MonoBehaviour
     //    verticalMovementInput = Input.GetAxis("Jump");
     //}
 
-    public void ApplyMovement(float horizontalStraightMovementInput, float horizontalSideMovementInput)
-    {
-        if (horizontalStraightMovementInput < 0)
-        {
-            Debug.Log("Atras");
-            moveBackwardCommand.Execute(); 
-        }
-        else if (horizontalStraightMovementInput > 0)
-        {
-            Debug.Log("Delante");
-            moveForwardCommand.Execute(); 
-        }
-
-        else if (horizontalSideMovementInput < 0) 
-        { 
-            turnLeftCommand.Execute(); 
-        }
-        else if (horizontalSideMovementInput > 0) 
-        { 
-            turnRightCommand.Execute(); 
-        }
-
-        //if (verticalMovementInput > 0)
-        //{
-        //    jumpCommand.Execute();
-        //}
-    }
+    
 
     // Reset the logic of the Player state
     

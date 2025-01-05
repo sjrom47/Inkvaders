@@ -18,7 +18,7 @@ public class CameraRotationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 viewDir = playableCharacterTransform.position - new Vector3(transform.position.x, playableCharacterTransform.position.y, transform.position.z);
+        Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
         float horizontalInput = Input.GetAxis("Horizontal");
