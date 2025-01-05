@@ -330,7 +330,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1101105243}
+    m_TransformParent: {fileID: 662983183}
     m_Modifications:
     - target: {fileID: 1424761942650323863, guid: ef3a44aeaa302104a8659bb3e1043280, type: 3}
       propertyPath: m_Name
@@ -16667,6 +16667,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 759482705}
+  - {fileID: 1861370719}
+  - {fileID: 1596666650}
+  - {fileID: 1912007258}
   - {fileID: 1101105243}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29377,10 +29381,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 497175703}
-  - {fileID: 1912007258}
-  - {fileID: 1596666650}
-  - {fileID: 1861370719}
-  - {fileID: 759482705}
   m_Father: {fileID: 662983183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1108932474
@@ -44895,7 +44895,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1101105243}
+    m_TransformParent: {fileID: 662983183}
     m_Modifications:
     - target: {fileID: 117800, guid: 479d26050afb50244823e542e662566f, type: 3}
       propertyPath: m_IsActive
@@ -47871,7 +47871,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.9883, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1101105243}
+  m_Father: {fileID: 662983183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1596666651
 BoxCollider:
@@ -48869,7 +48869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.5706222, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1101105243}
+  m_Father: {fileID: 662983183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1861370720
 BoxCollider:
@@ -49463,11 +49463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6715fac956f3df469b5977542804f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 497175703}
-  playableCharacterTransform: {fileID: 662983183}
-  playerTransform: {fileID: 1101105243}
-  playableCharacterRigidbody: {fileID: 662983184}
-  rotationSpeed: 5
+  playerTransform: {fileID: 662983183}
 --- !u!1001 &1978355517
 PrefabInstance:
   m_ObjectHideFlags: 0

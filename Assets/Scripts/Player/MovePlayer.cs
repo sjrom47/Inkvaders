@@ -11,36 +11,36 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] float drag = 0.5f;
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     Rigidbody rb;
-    Transform childTransform;
+    //Transform childTransform;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.drag = drag;
-        childTransform = transform.GetChild(0).Find("Orientation").transform;
+        //childTransform = transform.GetChild(0).Find("Orientation").transform;
     }
 
     //These methods will be executed by their own command
     public void MoveForward()
     {
-        Debug.Log(childTransform.forward);
-        Move(childTransform.forward);
+        Debug.Log(transform.forward);
+        Move(transform.forward);
     }
 
     public void MoveBackward()
     {
-        Move(-childTransform.forward);
+        Move(-transform.forward);
     }
 
     public void TurnLeft()
     {
-        Move(-childTransform.right);
+        Move(-transform.right);
     }
 
     public void TurnRight()
     {
         Debug.Log(transform.right);
-        Move(childTransform.right);
+        Move(transform.right);
     }
     //public void Jump()
     //{
