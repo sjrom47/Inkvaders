@@ -1,0 +1,1 @@
+Mini Splatling (Splatoon 2 version) by Cheesecannon25 on Thingiverse: https://www.thingiverse.com/thing:3555688
