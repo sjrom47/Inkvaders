@@ -2,26 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityController : MonoBehaviour
+public class EntityController : BaseController
 {
-    float horizontalStraightMovementInput;
-    float horizontalSideMovementInput;
+    
     //float verticalMovementInput;
 
-    MovePlayer movePlayer;
-    MoveForwardCommand moveForwardCommand;
-    MoveBackwardCommand moveBackwardCommand;
-    TurnRightCommand turnRightCommand;
-    TurnLeftCommand turnLeftCommand;
-    // Start is called before the first frame update
-    protected void Awake()
+    
+    void Awake()
     {
-        
-        movePlayer = GetComponent<MovePlayer>();
-        moveForwardCommand = new MoveForwardCommand(movePlayer);
-        moveBackwardCommand = new MoveBackwardCommand(movePlayer);
-        turnRightCommand = new TurnRightCommand(movePlayer);
-        turnLeftCommand = new TurnLeftCommand(movePlayer);
+        base.Awake();
     }
 
     public void ApplyMovement(float horizontalStraightMovementInput, float horizontalSideMovementInput)

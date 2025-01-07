@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     PlayerController playerController;
     float horizontalStraightMovementInput;
     float horizontalSideMovementInput;
+    bool isShooting;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class InputManager : MonoBehaviour
         
         horizontalStraightMovementInput = Input.GetAxis("Vertical");
         horizontalSideMovementInput = Input.GetAxis("Horizontal");
-        playerController.ApplyMovement(horizontalStraightMovementInput, horizontalSideMovementInput);
+        playerController.ApplyPlayerMovementAndShot(horizontalStraightMovementInput, horizontalSideMovementInput, isShooting);
     }
 
     private void Update()
@@ -31,6 +32,11 @@ public class InputManager : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Q))
         {
             playerController.EndSquidTransformation();
+        }
+        if (!Input.GetKey(KeyCode.Q))
+        {
+             isShooting = Input.GetMouseButton(0);
+
         }
     }
 }

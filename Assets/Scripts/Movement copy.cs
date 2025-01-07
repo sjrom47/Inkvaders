@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movementcopy : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Transform target;
+    Transform target;
     [SerializeField] Vector3 PositionOffset;
     [SerializeField] Vector3 RotationOffset;
     Quaternion rotationOffsetQuat;
@@ -15,6 +15,10 @@ public class Movementcopy : MonoBehaviour
     }
 
     // Update is called once per frame
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
     void LateUpdate()
     {
         if (target != null)
