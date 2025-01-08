@@ -20,4 +20,8 @@ public class MonoBehaviourSingleton<T> :  MonoBehaviour where T: MonoBehaviour
         }
         return instance;
     }
+    public static void EnableScenePersistance()
+    {
+        DontDestroyOnLoad(Instance());
+    }
 }

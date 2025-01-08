@@ -79,7 +79,7 @@ public class PlayerController : BaseController
             weaponHolder.TryStopShoot();
         }
         lastShootingValue = isShooting;
-        Debug.Log(lastShootingValue);
+        
         animController.Animate(direction, lastShootingValue);
         
 
