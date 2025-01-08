@@ -15,7 +15,7 @@ public class PlayerController : BaseController
     [SerializeField] GameObject playerHitbox;
     [SerializeField] GameObject squid;
     [SerializeField] GameObject squidHitbox;
-    [SerializeField] public AnimationController animController;
+    [SerializeField] AnimationController animController;
 
 
     //JumpCommand jumpCommand;
@@ -23,6 +23,8 @@ public class PlayerController : BaseController
     bool lastShootingValue;
     Direction direction;
     WeaponHolder weaponHolder;
+    public AnimationController AnimController {  get { return animController; } }
+    public WeaponHolder WeaponHolder { get { return weaponHolder; } }
 
     // Start is called before the first frame update
     void Awake()

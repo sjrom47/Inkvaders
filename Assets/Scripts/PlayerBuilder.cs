@@ -17,7 +17,7 @@ public class PlayerBuilder : MonoBehaviour
             Destroy(currentlyBuiltPlayer.gameObject);
         }
         // Instantiate the prefab
-        GameObject playerGO = Instantiate(playerPrefab);
+        GameObject playerGO = Instantiate(playerPrefab, new Vector3(49, 2, -42), Quaternion.identity);
 
         // Get the Player component for configuration
         currentlyBuiltPlayer = playerGO.GetComponent<Player>();
@@ -127,6 +127,13 @@ public class PlayerBuilder : MonoBehaviour
 
         navMeshAgent.radius = 0.4f;
         navMeshAgent.height = 2;
+
+        // Ensure PlayerController exists
+        PlayerController playerController = currentlyBuiltPlayer.GetComponent<PlayerController>();
+        if (playerController == null)
+        {
+            playerController = currentlyBuiltPlayer.gameObject.AddComponent<PlayerController>();
+        }
 
         // Ensure Enemy exists
         Enemy enemy = currentlyBuiltPlayer.GetComponent<Enemy>();

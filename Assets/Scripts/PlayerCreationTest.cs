@@ -10,10 +10,12 @@ public class PlayerCreationTest : MonoBehaviour
     [SerializeField] InputManager inputManager;
     [SerializeField] Color color;
     [SerializeField] GameObject cinemachineCamera;
+    [SerializeField] Path path;
     void Start()
     {
         builder = GetComponent<PlayerBuilder>();
-        BuildTestPlayer();
+        //BuildTestPlayer();
+        BuildTestEnemy();
     }
 
     void BuildTestPlayer()
@@ -23,6 +25,15 @@ public class PlayerCreationTest : MonoBehaviour
         builder.AddInputManager(inputManager);
         builder.AssignColor2Player(color);
         builder.AssignWeapon2Player(weaponPrefab);
+        builder.BuildPlayer();
+    }
+
+    void BuildTestEnemy()
+    {
+        builder.StartCreatingPlayer();
+        builder.AssignColor2Player(color);
+        builder.AssignWeapon2Player(weaponPrefab);
+        builder.AddEnemyController(path);
         builder.BuildPlayer();
     }
 

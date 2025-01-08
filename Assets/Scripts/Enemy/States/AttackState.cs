@@ -20,7 +20,7 @@ public class AtackState : BaseState
             if (moveTimer > Random.Range(3, 7))
             {
                 enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 5));
-                enemy.PlayerController.animController.Animate(Direction.FORWARD, true);
+                enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
                 moveTimer = 0;
             }
         }
