@@ -9,7 +9,7 @@ public class PlayerBuilder : MonoBehaviour
     [SerializeField] GameObject playerPrefab; // Prefab with all required components
     Player currentlyBuiltPlayer;
 
-    public void StartCreatingPlayer()
+    public void StartCreatingPlayer(Vector3 position)
     {
         if (currentlyBuiltPlayer != null)
         {

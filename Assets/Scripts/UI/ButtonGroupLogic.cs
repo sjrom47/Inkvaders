@@ -31,7 +31,19 @@ public class ButtonGroupLogic : MonoBehaviour
 
     void OnButtonClick(int index)
     {
+        
         SelectButton(index);
+    }
+
+    void SetChosenWeapon(int index)
+    {
+        WeaponButton weaponButton = buttons[index].GetComponent<WeaponButton>();
+
+        if (weaponButton != null && weaponButton.WeaponPrefab != null)
+        {
+            GameManager.Instance().ChangeChosenWeapon(weaponButton.WeaponPrefab); 
+        }
+        
     }
 
     string GetButtonText(int index)
@@ -40,6 +52,7 @@ public class ButtonGroupLogic : MonoBehaviour
     }
     void SelectButton(int index)
     {
+
         // Deselect the previously selected button
         if (selectedButtonIndex >= 0 && selectedButtonIndex < buttons.Length)
         {

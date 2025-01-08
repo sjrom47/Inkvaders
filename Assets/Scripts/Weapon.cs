@@ -21,7 +21,10 @@ public class Weapon : MonoBehaviour
 
     public void SetColor(Color color)
     {
-
+        ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+        particles.gameObject.GetComponent<Renderer>().material.color = color;
+        ParticleCollision particleCollision = GetComponentInChildren<ParticleCollision>();
+        particleCollision.PaintColor = color;
     }
     public void Shoot()
     {
