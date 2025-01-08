@@ -12,7 +12,7 @@ public class SpeedBost : MonoBehaviour
     private void Start()
     {
         // Obtener el componente CharacterMovement del jugador
-        characterMovement = GameObject.Find("PlayerBody").GetComponent<CharacterMovement>();
+        characterMovement = GameObject.Find("Player").GetComponent<CharacterMovement>();
     }
 
     private void OnTriggerEnter(Collider other)
