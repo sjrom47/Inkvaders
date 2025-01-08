@@ -1,41 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 //This class handles all methods that moves the player it's attached to
 public class MovePlayer : MonoBehaviour
 {
     //Speed of the object
-    private const float MOVE_STEP_DISTANCE = 1f;
+    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float drag = 0.5f;
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    Rigidbody rb;
+    //Transform childTransform;
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        rb.drag = drag;
+        //childTransform = transform.GetChild(0).Find("Orientation").transform;
+    }
 
     //These methods will be executed by their own command
     public void MoveForward()
     {
-        Move(Vector3.forward);
+        Debug.Log(transform.forward);
+        Move(transform.forward);
     }
 
     public void MoveBackward()
     {
-        Move(Vector3.back);
+        Move(-transform.forward);
     }
 
     public void TurnLeft()
     {
-        Move(Vector3.left);
+        Move(-transform.right);
     }
 
     public void TurnRight()
     {
-        Move(Vector3.right);
+        Debug.Log(transform.right);
+        Move(transform.right);
     }
-    public void Jump()
-    {
-        Move(Vector3.up);
-    }
+    //public void Jump()
+    //{
+    //    Move(Vector3.up);
+    //}
 
     //Help method to make it more general
     private void Move(Vector3 dir)
     {
-        transform.Translate(dir * MOVE_STEP_DISTANCE);
+        rb.AddForce(dir.normalized * moveSpeed * 10f, ForceMode.Force);
+        
     }
 }
