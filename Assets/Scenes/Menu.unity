@@ -1692,7 +1692,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1545748033079076624, guid: 747747e7179f1984da47569b87df9d7c, type: 3}
       propertyPath: m_text
-      value: Roller
+      value: Minigun
       objectReference: {fileID: 0}
     - target: {fileID: 3600998150888302441, guid: 747747e7179f1984da47569b87df9d7c, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -1896,7 +1896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749642915561297222, guid: 747747e7179f1984da47569b87df9d7c, type: 3}
       propertyPath: m_Name
-      value: Roller
+      value: Minigun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2853,7 +2853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561356083093461019, guid: eb59d2e0380329f44a1ad11a37e7c3f2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6555566463375834008, guid: eb59d2e0380329f44a1ad11a37e7c3f2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3164,7 +3164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 561356083093461019, guid: eb59d2e0380329f44a1ad11a37e7c3f2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6555566463375834008, guid: eb59d2e0380329f44a1ad11a37e7c3f2, type: 3}
       propertyPath: m_LocalPosition.x
