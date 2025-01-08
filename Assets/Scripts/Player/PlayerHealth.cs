@@ -1,26 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    public Color PlayerColor {  get; set; }
-
-    // Health
     private float health;
     public float maxHealth;
 
-    // Damage Overlay
     public Image damageOverlay;
     public float duration;
     public float fadeSpeed;
     private float durationTimer;
-
     // Start is called before the first frame update
     void Start()
     {
-        PlayerColor = Color.black;
+        health = maxHealth;
+        damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 0);
+        Debug.Log(health);
     }
 
     // Update is called once per frame
@@ -29,12 +27,20 @@ public class Player : MonoBehaviour
         if (damageOverlay.color.a > 0)
         {
             durationTimer += Time.deltaTime;
-            if (durationTimer > 0)
+            if (durationTimer > 0) 
             {
                 float tempAlpha = damageOverlay.color.a;
                 tempAlpha -= Time.deltaTime * fadeSpeed;
                 damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, tempAlpha);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            RestoreHealth(20);
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            TakeDamage(20);
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using static UnityEngine.EventSystems.EventTrigger;
 using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
+
 
 // TODO: see if this should be a monobehaviour Singleton or a regular singleton
 public class PaintManager : MonoBehaviourSingleton<PaintManager>
