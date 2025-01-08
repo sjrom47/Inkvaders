@@ -70,13 +70,17 @@ public class PlayerController : BaseController
         }
         if (isShooting && !lastShootingValue)
         {
+            Debug.Log(weaponHolder);
             weaponHolder.TryShoot();
         }
-        else if (!isShooting && !lastShootingValue) 
+        else if (!isShooting && lastShootingValue) 
         {
             weaponHolder.TryStopShoot();
         }
-        animController.Animate(direction, isShooting);
+        lastShootingValue = isShooting;
+        Debug.Log(lastShootingValue);
+        animController.Animate(direction, lastShootingValue);
+        
 
     }
 

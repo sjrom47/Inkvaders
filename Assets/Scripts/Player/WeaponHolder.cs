@@ -17,7 +17,10 @@ public class WeaponHolder : MonoBehaviour
         GameObject weaponInstance = Instantiate(weaponPrefab, weaponPlacement);
         currentWeapon = weaponInstance.GetComponent<Weapon>();
     }
-
+    public Transform GetWeaponPlacement()
+    {
+        return weaponPlacement;
+    }
     public void AssignColor2Weapon(Color color)
     {
         if (currentWeapon != null)

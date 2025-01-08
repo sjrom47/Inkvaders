@@ -6,7 +6,7 @@ public class CameraRotationController : MonoBehaviour
 {
     //[SerializeField] Transform orientation;
     //[SerializeField] Transform playableCharacterTransform;
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     //[SerializeField] Rigidbody playableCharacterRigidbody;
     //[SerializeField] float rotationSpeed;
     // Start is called before the first frame update
@@ -15,11 +15,18 @@ public class CameraRotationController : MonoBehaviour
         
     }
 
+    public void SetPlayerTransform(Transform playerTransform)
+    {
+        this.playerTransform = playerTransform;
+    }
     // Update is called once per frame
     void Update()
     {
-        Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
-        playerTransform.forward = viewDir;
+        if (playerTransform != null)
+        {
+            Vector3 viewDir = playerTransform.position - new Vector3(transform.position.x, playerTransform.position.y, transform.position.z);
+            playerTransform.forward = viewDir;
+        }
         //orientation.forward = viewDir.normalized;
 
         //float horizontalInput = Input.GetAxis("Horizontal");

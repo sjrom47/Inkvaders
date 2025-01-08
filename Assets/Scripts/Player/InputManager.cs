@@ -11,32 +11,41 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        
+    }
+    public void SetPlayerController(PlayerController playerController)
+    {
+        this.playerController = playerController;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        horizontalStraightMovementInput = Input.GetAxis("Vertical");
-        horizontalSideMovementInput = Input.GetAxis("Horizontal");
-        playerController.ApplyPlayerMovementAndShot(horizontalStraightMovementInput, horizontalSideMovementInput, isShooting);
+        if (playerController != null)
+        {
+            horizontalStraightMovementInput = Input.GetAxis("Vertical");
+            horizontalSideMovementInput = Input.GetAxis("Horizontal");
+            playerController.ApplyPlayerMovementAndShot(horizontalStraightMovementInput, horizontalSideMovementInput, isShooting);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (playerController != null)
         {
-            playerController.TransformIntoSquid();
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-            playerController.EndSquidTransformation();
-        }
-        if (!Input.GetKey(KeyCode.Q))
-        {
-             isShooting = Input.GetMouseButton(0);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                playerController.TransformIntoSquid();
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                playerController.EndSquidTransformation();
+            }
+            if (!Input.GetKey(KeyCode.Q))
+            {
+                isShooting = Input.GetMouseButton(0);
 
+            }
         }
     }
 }

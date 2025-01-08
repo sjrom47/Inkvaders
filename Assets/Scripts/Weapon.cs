@@ -5,10 +5,12 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     ShootCommand shotCommand;
+    ParticleSystem weaponParticleSystem;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        shotCommand = new ShootCommand(GetComponentInChildren<ParticleSystem>());
+        weaponParticleSystem = GetComponentInChildren<ParticleSystem>();
+        shotCommand = new ShootCommand(weaponParticleSystem);
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class Weapon : MonoBehaviour
     }
     public void Shoot()
     {
+        Debug.Log(shotCommand);
         shotCommand.Execute();
     }
 

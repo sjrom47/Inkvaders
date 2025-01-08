@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -47,6 +48,7 @@ public class PlayerBuilder : MonoBehaviour
     public void AssignWeapon2Player(GameObject weaponPrefab)
     {
         if (currentlyBuiltPlayer == null) return;
+        weaponPrefab.SetActive(true);
 
         WeaponHolder weaponHolder = currentlyBuiltPlayer.GetComponentInChildren<WeaponHolder>();
         if (weaponHolder == null)
@@ -56,6 +58,12 @@ public class PlayerBuilder : MonoBehaviour
         }
 
         weaponHolder.EquipWeapon(weaponPrefab);
+        Weapon weapon = weaponHolder.GetCurrentWeapon();
+        Movementcopy copier = weapon.gameObject.GetComponent<Movementcopy>();
+        if (copier != null)
+        {
+            copier.SetTarget(weaponHolder.GetWeaponPlacement());
+        }
 
         // Ensure weapon inherits player's color
         if (currentlyBuiltPlayer.PlayerColor != null)
@@ -64,22 +72,45 @@ public class PlayerBuilder : MonoBehaviour
         }
     }
 
-    public void AddInputManager()
+    public void AddInputManager(InputManager inputManager)
     {
         if (currentlyBuiltPlayer == null) return;
 
-        // Check if the InputManager already exists to avoid duplicates
-        if (currentlyBuiltPlayer.GetComponent<InputManager>() == null)
+        // Ensure PlayerController exists
+        PlayerController playerController = currentlyBuiltPlayer.GetComponent<PlayerController>();
+        if (playerController == null)
         {
-            currentlyBuiltPlayer.gameObject.AddComponent<InputManager>();
+            playerController = currentlyBuiltPlayer.gameObject.AddComponent<PlayerController>();
         }
+
+        // Add InputManager and pass PlayerController reference
+        // Attach the provided InputManager instance to the player
+        inputManager = currentlyBuiltPlayer.gameObject.AddComponent(inputManager.GetType()) as InputManager;
+        inputManager.SetPlayerController(playerController);
     }
 
+    public void AddCamera2Player(GameObject camera)
+    {
+        Transform playerTransform = currentlyBuiltPlayer.gameObject.transform;
+        if (currentlyBuiltPlayer == null) return;
+        CinemachineFreeLook cinemachineCamera = camera.GetComponent<CinemachineFreeLook>();
+        if (cinemachineCamera != null)
+        {
+            cinemachineCamera.LookAt = playerTransform;
+            cinemachineCamera.Follow = playerTransform;
+        }
+        CameraRotationController cameraRotationController = camera.GetComponent<CameraRotationController>();
+        if (cameraRotationController != null)
+        {
+            cameraRotationController.SetPlayerTransform(playerTransform);
+        }
+    }
     public Player BuildPlayer()
     {
         if (currentlyBuiltPlayer != null)
         {
             // Activate the GameObject when fully built
+            Debug.Log('a');
             currentlyBuiltPlayer.gameObject.SetActive(true);
         }
         return currentlyBuiltPlayer;
