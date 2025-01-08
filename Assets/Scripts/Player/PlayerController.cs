@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum Direction
@@ -83,8 +84,6 @@ public class PlayerController : BaseController
         
 
     }
-
-    // Update is called once per frame
     
 
     //void CheckInput()
@@ -114,5 +113,5 @@ public class PlayerController : BaseController
     {
         squidTransformCommand.Undo();
     }
-    
+
 }
