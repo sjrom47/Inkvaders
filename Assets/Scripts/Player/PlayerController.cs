@@ -15,7 +15,7 @@ public class PlayerController : BaseController
     [SerializeField] GameObject playerHitbox;
     [SerializeField] GameObject squid;
     [SerializeField] GameObject squidHitbox;
-    [SerializeField] AnimationController animController;
+    [SerializeField] public AnimationController animController;
 
 
     //JumpCommand jumpCommand;

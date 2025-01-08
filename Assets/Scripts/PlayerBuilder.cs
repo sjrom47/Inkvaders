@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerBuilder : MonoBehaviour
 {
@@ -105,6 +106,38 @@ public class PlayerBuilder : MonoBehaviour
             cameraRotationController.SetPlayerTransform(playerTransform);
         }
     }
+
+    public void AddEnemyController(Path path)
+    {
+        if (currentlyBuiltPlayer == null) return;
+
+        // Ensure StateMachine exists
+        StateMachine stateMachine = currentlyBuiltPlayer.GetComponent<StateMachine>();
+        if (stateMachine == null)
+        {
+            stateMachine = currentlyBuiltPlayer.gameObject.AddComponent<StateMachine>();
+        }
+
+        // Ensure NavMeshAgent exists
+        NavMeshAgent navMeshAgent = currentlyBuiltPlayer.GetComponent<NavMeshAgent>();
+        if (navMeshAgent == null)
+        {
+            navMeshAgent = currentlyBuiltPlayer.gameObject.AddComponent<NavMeshAgent>();
+        }
+
+        navMeshAgent.radius = 0.4f;
+        navMeshAgent.height = 2;
+
+        // Ensure Enemy exists
+        Enemy enemy = currentlyBuiltPlayer.GetComponent<Enemy>();
+        if (enemy == null)
+        {
+            enemy = currentlyBuiltPlayer.gameObject.AddComponent<Enemy>();
+        }
+
+        enemy.path = path;
+    }
+
     public Player BuildPlayer()
     {
         if (currentlyBuiltPlayer != null)

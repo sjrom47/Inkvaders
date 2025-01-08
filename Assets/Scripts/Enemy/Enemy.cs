@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; }
+    private PlayerController playerController;
+    public PlayerController PlayerController { get => playerController; }
 
     [SerializeField]
     private string currentState;
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         stateMachine.Initialize();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame

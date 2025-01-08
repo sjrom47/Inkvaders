@@ -2895,6 +2895,8 @@ GameObject:
   - component: {fileID: 648606306}
   - component: {fileID: 648606305}
   - component: {fileID: 648606304}
+  - component: {fileID: 648606308}
+  - component: {fileID: 648606307}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2968,6 +2970,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &648606307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648606302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba648899a2634bc4194bd6303a21aa99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 715358815}
+--- !u!114 &648606308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648606302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f3f731ed3a3634a8c22bbec00377b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 715358815}
+  playerHitbox: {fileID: 0}
+  squid: {fileID: 0}
+  squidHitbox: {fileID: 0}
+  animController: {fileID: 648606307}
 --- !u!1001 &654093556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3264,6 +3296,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &715358815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158050, guid: 479d26050afb50244823e542e662566f, type: 3}
+  m_PrefabInstance: {fileID: 813754571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &724681102
 PrefabInstance:
   m_ObjectHideFlags: 0
