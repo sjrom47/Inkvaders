@@ -27,6 +27,10 @@ public class PlayerReloadState : PlayerBaseState
                 stateMachine.ChangeState(new PlayerNothingState());
             }
         }
+        else if (!player.IsSquid)
+        {
+            stateMachine.ChangeState(new PlayerNothingState());
+        }
     }
     public override void Exit()
     {

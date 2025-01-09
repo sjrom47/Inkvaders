@@ -75,17 +75,25 @@ public class PlayerController : BaseController
             turnRightCommand.Execute();
             direction = Direction.RIGHT;
         }
-        if (isShooting && !lastShootingValue)
+        if (isShooting && !lastShootingValue && !playerComponent.IsSquid)
         {
             Debug.Log(weaponHolder);
             weaponHolder.TryShoot();
         }
-        else if (!isShooting && lastShootingValue) 
+        else if (!isShooting && lastShootingValue || playerComponent.IsSquid) 
         {
             weaponHolder.TryStopShoot();
         }
-        lastShootingValue = isShooting;
-        
+        if (!playerComponent.IsSquid)
+        {
+            lastShootingValue = isShooting;
+
+        }
+        else
+        {
+            lastShootingValue = false;
+        }
+
         animController.Animate(direction, lastShootingValue);
         
 

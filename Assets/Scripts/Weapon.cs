@@ -97,7 +97,10 @@ public class Weapon : MonoBehaviour
     public void StopShooting()
     {
         shotCommand.Undo();
-        StopCoroutine(shootingCoroutine);
+        if (shootingCoroutine != null)
+        {
+            StopCoroutine(shootingCoroutine);
+        }
     }
 
     public void Reload()
@@ -108,7 +111,10 @@ public class Weapon : MonoBehaviour
 
     public void StopReloading()
     {
-        StopCoroutine(reloadingCoroutine);
+        if (reloadingCoroutine != null)
+        {
+            StopCoroutine(reloadingCoroutine);
+        }
     }
 
     public IEnumerator ReloadAmunition()
