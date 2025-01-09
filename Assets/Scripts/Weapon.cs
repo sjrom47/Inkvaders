@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log(amunition);
+            Debug.Log(amunition);
             amunition++;
             if (amunition >= maxAmunitionCapacity)
             {
@@ -86,7 +86,7 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log(amunition);
+            Debug.Log(amunition);
             amunition--;
             if (amunition <= 0)
             {

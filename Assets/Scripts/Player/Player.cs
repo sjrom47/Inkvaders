@@ -27,12 +27,16 @@ public class Player : MonoBehaviour
     public event Action StopReloading;
     public bool isTakingDamage = false;
 
+    private PlayerStateMachine stateMachine;
+
     // Start is called before the first frame update
     void Start()
     {
         PlayerColor = Color.black;
         PaintManager = PaintManager.Instance();
         health = maxHealth;
+        stateMachine = GetComponent<PlayerStateMachine>();
+        stateMachine.Initialize();
     }
 
     // Update is called once per frame
@@ -51,28 +55,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        //Color floorColor = paintManager.GetColorOfFloor(transform.position);
-        //if (IsSquid && floorColor == PlayerColor)
-        //{
-        //    if (!isReloading)
-        //    {
-        //        StartReloading?.Invoke();
-        //        isReloading = true;
-        //    }
-        //}
-        //else
-        //{
-        //    if (isReloading)
-        //    {
-        //        StopReloading?.Invoke();
-        //        isReloading = false;
-        //    }
-        //    if (floorColor != PlayerColor && floorColor != Color.black)
-        //    {
-        //        // Deber�a recibir da�o
-
-        //    }
-        //}
     }
 
     public void TakeDamage(float damage)
