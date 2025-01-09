@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Color PlayerColor {  get; set; }
+    public Vector3 SpawnPoint { get; set; }
+    [SerializeField] float deathTime = 5f;
 
     // Health
     private float health;
@@ -44,6 +46,10 @@ public class Player : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
         durationTimer = 0;
         damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 1);
+        if (health == 0)
+        {
+            PlayerDeath();
+        }
         Debug.Log(health);
     }
 
@@ -52,5 +58,18 @@ public class Player : MonoBehaviour
         health += heal;
         health = Mathf.Clamp(health, 0, maxHealth);
         Debug.Log(health);
+    }
+
+    void PlayerDeath()
+    {
+        gameObject.SetActive(false);
+        StartCoroutine("DeathCoroutine");
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(deathTime);
+        gameObject.transform.position = SpawnPoint;
+        gameObject.SetActive(true);
     }
 }

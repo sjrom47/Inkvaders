@@ -26,6 +26,7 @@ public class PlayerBuilder : MonoBehaviour
             Debug.LogError("Player component is missing on the prefab!");
             return;
         }
+        currentlyBuiltPlayer.SpawnPoint = position;
 
         // Optionally deactivate the GameObject during setup
         playerGO.SetActive(false);
@@ -88,6 +89,8 @@ public class PlayerBuilder : MonoBehaviour
         inputManager = currentlyBuiltPlayer.gameObject.AddComponent(inputManager.GetType()) as InputManager;
         inputManager.SetPlayerController(playerController);
     }
+
+    
 
     public void AddCamera2Player(GameObject camera)
     {

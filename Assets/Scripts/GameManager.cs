@@ -34,6 +34,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
     }
 
+    void OnGameEnd()
+    {
+        Dictionary<Color,int> colorCounts = PaintManager.Instance().OnGameEnd();
+        // TODO: make the event for the module that finds the winner
+    }
+
     public void ChangeChosenWeapon(GameObject chosenWeapon)
     {
         this.chosenWeapon = chosenWeapon;

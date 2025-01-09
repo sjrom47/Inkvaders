@@ -46,6 +46,11 @@ public class ParticleCollision : MonoBehaviour
                 PaintManager.Instance().PaintSurface(paintedSurface, pos, normalVector, radius, paintColor);
             }
         }
+        Player player = other.GetComponent<Player>();
+        if (player != null && player.PlayerColor != PaintColor)
+        {
+            player.TakeDamage(1f);
+        }
     }
 }
 
