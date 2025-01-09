@@ -16,8 +16,9 @@ public class PlayerController : BaseController
     [SerializeField] GameObject squid;
     [SerializeField] GameObject squidHitbox;
     [SerializeField] AnimationController animController;
-
-
+    
+    
+    Player playerComponent;
     //JumpCommand jumpCommand;
     SquidTransformCommand squidTransformCommand;
     bool lastShootingValue;
@@ -43,8 +44,11 @@ public class PlayerController : BaseController
         //    return;
         //}
         squidTransformCommand = new SquidTransformCommand(player,playerHitbox,squid,squidHitbox);
+        playerComponent = GetComponent<Player>();
+        playerComponent.StartReloading += StartReloading;
+        playerComponent.StopReloading += StopReloading;
 
-       
+
     }
 
     public void ApplyPlayerMovementAndShot(float horizontalStraightMovementInput, float horizontalSideMovementInput, bool isShooting)
@@ -109,11 +113,29 @@ public class PlayerController : BaseController
     public void TransformIntoSquid()
     {
         squidTransformCommand.Execute();
+        playerComponent.IsSquid = true;
     }
 
     public void EndSquidTransformation()
     {
         squidTransformCommand.Undo();
+        playerComponent.IsSquid = false;
+    }
+
+    public void StartReloading()
+    {
+        weaponHolder.GetCurrentWeapon().Reload();
+    }
+
+    public void StopReloading()
+    {
+        weaponHolder.GetCurrentWeapon().StopReloading();
+    }
+
+    private void OnDestroy()
+    {
+        playerComponent.StartReloading -= StartReloading;
+        playerComponent.StopReloading -= StopReloading;
     }
 
 }

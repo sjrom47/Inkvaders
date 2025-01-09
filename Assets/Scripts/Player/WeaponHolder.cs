@@ -7,6 +7,7 @@ public class WeaponHolder : MonoBehaviour
     Weapon currentWeapon;
     [SerializeField] Transform weaponPlacement;
 
+    private bool isShooting = false;
     public void EquipWeapon(GameObject weaponPrefab)
     {
         if (currentWeapon != null)
@@ -32,21 +33,22 @@ public class WeaponHolder : MonoBehaviour
     // Method for PlayerController to access
     public void TryShoot()
     {
-        if (currentWeapon != null)
+        if (currentWeapon != null && !isShooting)
         {
             currentWeapon.Shoot();
+            isShooting = true;
         }
     }
 
     public void TryStopShoot()
     {
-        if (currentWeapon != null)
+        if (currentWeapon != null && isShooting)
         {
             currentWeapon.StopShooting();
+            isShooting = false;
         }
     }
 
-    
     public Weapon GetCurrentWeapon()
     {
         return currentWeapon;

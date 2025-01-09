@@ -17,7 +17,7 @@ public class PlayerBuilder : MonoBehaviour
             Destroy(currentlyBuiltPlayer.gameObject);
         }
         // Instantiate the prefab
-        GameObject playerGO = Instantiate(playerPrefab, new Vector3(49, 2, -42), Quaternion.identity);
+        GameObject playerGO = Instantiate(playerPrefab, new Vector3(48, 2, -21.5f), Quaternion.identity);
 
         // Get the Player component for configuration
         currentlyBuiltPlayer = playerGO.GetComponent<Player>();
@@ -112,10 +112,10 @@ public class PlayerBuilder : MonoBehaviour
         if (currentlyBuiltPlayer == null) return;
 
         // Ensure StateMachine exists
-        StateMachine stateMachine = currentlyBuiltPlayer.GetComponent<StateMachine>();
+        EnemyStateMachine stateMachine = currentlyBuiltPlayer.GetComponent<EnemyStateMachine>();
         if (stateMachine == null)
         {
-            stateMachine = currentlyBuiltPlayer.gameObject.AddComponent<StateMachine>();
+            stateMachine = currentlyBuiltPlayer.gameObject.AddComponent<EnemyStateMachine>();
         }
 
         // Ensure NavMeshAgent exists
@@ -127,6 +127,10 @@ public class PlayerBuilder : MonoBehaviour
 
         navMeshAgent.radius = 0.4f;
         navMeshAgent.height = 2;
+        navMeshAgent.speed = 10;
+        navMeshAgent.acceleration = 5;
+        navMeshAgent.angularSpeed = 170;
+        //navMeshAgent.autoBraking = false;
 
         // Ensure PlayerController exists
         PlayerController playerController = currentlyBuiltPlayer.GetComponent<PlayerController>();

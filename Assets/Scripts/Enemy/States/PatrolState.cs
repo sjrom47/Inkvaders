@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : BaseState
+public class PatrolState : BaseEnemyState
 {
     public int waypointindex;
     public float waitTimer;
@@ -27,7 +27,7 @@ public class PatrolState : BaseState
         if (enemy.Agent.remainingDistance < 0.2f)
         {
             waitTimer += Time.deltaTime;
-            if (waitTimer > 3)
+            if (waitTimer > 0.3)
             {
                 if (waypointindex < enemy.path.waypoints.Count - 1)
                 {
@@ -38,8 +38,8 @@ public class PatrolState : BaseState
                     waypointindex = 0;
                 }
                 enemy.Agent.SetDestination(enemy.path.waypoints[waypointindex].position);
-                //enemy.PlayerController.AnimController.Animate(Direction.FORWARD, false);
-                //enemy.PlayerController.WeaponHolder.TryStopShoot();
+                enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
+                enemy.PlayerController.WeaponHolder.TryShoot();
                 waitTimer = 0;
             }
             else
