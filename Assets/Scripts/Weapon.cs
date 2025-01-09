@@ -93,6 +93,10 @@ public class Weapon : MonoBehaviour
             StartCoroutine(shootingCoroutine);
         }
     }
+    public void FullReload()
+    {
+        amunition = maxAmunitionCapacity;
+    }
 
     public void StopShooting()
     {

@@ -54,37 +54,40 @@ public class PlayerController : BaseController
     public void ApplyPlayerMovementAndShot(float horizontalStraightMovementInput, float horizontalSideMovementInput, bool isShooting)
     {
         direction = Direction.NONE;
-        if (horizontalStraightMovementInput < 0)
+        if (!playerComponent.IsDead) 
         {
-            moveBackwardCommand.Execute();
-            direction = Direction.BACKWARD;
-        }
-        else if (horizontalStraightMovementInput > 0)
-        {
-            moveForwardCommand.Execute();
-            direction = Direction.FORWARD;
-        }
+            if (horizontalStraightMovementInput < 0)
+            {
+                moveBackwardCommand.Execute();
+                direction = Direction.BACKWARD;
+            }
+            else if (horizontalStraightMovementInput > 0)
+            {
+                moveForwardCommand.Execute();
+                direction = Direction.FORWARD;
+            }
 
-        else if (horizontalSideMovementInput < 0)
-        {
-            turnLeftCommand.Execute();
-            direction = Direction.LEFT;
+            else if (horizontalSideMovementInput < 0)
+            {
+                turnLeftCommand.Execute();
+                direction = Direction.LEFT;
+            }
+            else if (horizontalSideMovementInput > 0)
+            {
+                turnRightCommand.Execute();
+                direction = Direction.RIGHT;
+            }
         }
-        else if (horizontalSideMovementInput > 0)
+        if (isShooting && !lastShootingValue && !playerComponent.IsSquid && !playerComponent.IsDead)
         {
-            turnRightCommand.Execute();
-            direction = Direction.RIGHT;
-        }
-        if (isShooting && !lastShootingValue && !playerComponent.IsSquid)
-        {
-            Debug.Log(weaponHolder);
+            
             weaponHolder.TryShoot();
         }
-        else if (!isShooting && lastShootingValue || playerComponent.IsSquid) 
+        else if (!isShooting && lastShootingValue || playerComponent.IsSquid || playerComponent.IsDead) 
         {
             weaponHolder.TryStopShoot();
         }
-        if (!playerComponent.IsSquid)
+        if (!playerComponent.IsSquid && !playerComponent.IsDead)
         {
             lastShootingValue = isShooting;
 
