@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IStateMachine
 {
-    public void Initialize() {}
-    public void ChangeState(BaseState newState) {}
+    public void Initialize();
+    public void ChangeState(BaseState newState);
 }

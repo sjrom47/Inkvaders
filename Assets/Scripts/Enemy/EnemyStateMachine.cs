@@ -25,14 +25,14 @@ public class EnemyStateMachine : MonoBehaviour, IStateMachine
         }
     }
 
-    public void ChangeState(BaseEnemyState newState)
+    public void ChangeState(BaseState newState)
     {
         if (activeState != null) // clean activeState if any
         {
             activeState.Exit();
         }
 
-        activeState = newState; // change to new state
+        activeState = (BaseEnemyState)newState; // change to new state
 
         if (activeState != null)
         {

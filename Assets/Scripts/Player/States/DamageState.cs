@@ -14,13 +14,13 @@ public class DamageState : PlayerBaseState
     {
         Color floorColor = player.PaintManager.GetColorOfFloor(player.transform.position);
 
-        if (player.IsSquid && floorColor == player.PlayerColor)
+        if (player.IsSquid && ColorChecker.ColorsAreClose(floorColor, player.PlayerColor))
         {
             stateMachine.ChangeState(new PlayerReloadState());
         }
         else
         {
-            if (floorColor == player.PlayerColor || floorColor == Color.black)
+            if (ColorChecker.ColorsAreClose(floorColor, player.PlayerColor) || ColorChecker.ColorsAreClose(floorColor, Color.black))
             {
                 stateMachine.ChangeState(new PlayerNothingState());
             }

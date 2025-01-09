@@ -15,9 +15,10 @@ public class PlayerReloadState : PlayerBaseState
     {
         Color floorColor = player.PaintManager.GetColorOfFloor(player.transform.position);
 
-        if (floorColor != player.PlayerColor)
+        Debug.Log("Vamoooooooooooooooos");
+        if (!ColorChecker.ColorsAreClose(floorColor, player.PlayerColor))
         {
-            if (floorColor != Color.black)
+            if (ColorChecker.ColorsAreClose(floorColor, Color.black))
             {
                 stateMachine.ChangeState(new DamageState());
             }

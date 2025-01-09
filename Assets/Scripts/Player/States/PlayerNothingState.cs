@@ -13,15 +13,21 @@ public class PlayerNothingState : PlayerBaseState
     public override void Perform()
     {
         Color floorColor = player.PaintManager.GetColorOfFloor(player.transform.position);
-        Debug.Log("En nothing state");
-        Debug.Log(floorColor == player.PlayerColor);
-        if (player.IsSquid && floorColor == player.PlayerColor)
+        //Debug.Log("En nothing State");
+        //Debug.Log(player.IsSquid);
+        //Debug.Log(ColorChecker.ColorsAreClose(floorColor, player.PlayerColor));
+        //Debug.Log(player.PlayerColor);
+        //Debug.Log(floorColor);
+        //Debug.Log(player.IsSquid && ColorChecker.ColorsAreClose(floorColor, player.PlayerColor));
+        //Debug.Log(stateMachine);
+        if (player.IsSquid && ColorChecker.ColorsAreClose(floorColor, player.PlayerColor))
         {
-               stateMachine.ChangeState(new PlayerReloadState());
+            //Debug.Log("Vas a cambiar de estado");
+            stateMachine.ChangeState(new PlayerReloadState());
         }
         else
         {
-            if (floorColor != player.PlayerColor && floorColor != Color.black)
+            if (!ColorChecker.ColorsAreClose(floorColor, player.PlayerColor) && !ColorChecker.ColorsAreClose(floorColor, Color.black))
             {
                 stateMachine.ChangeState(new DamageState());
             }
