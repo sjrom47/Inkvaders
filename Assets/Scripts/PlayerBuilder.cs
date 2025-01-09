@@ -30,6 +30,13 @@ public class PlayerBuilder : MonoBehaviour
         }
         currentlyBuiltPlayer.SpawnPoint = position;
 
+        // Ensure StateMachine exists
+        PlayerStateMachine stateMachine = currentlyBuiltPlayer.GetComponent<PlayerStateMachine>();
+        if (stateMachine == null)
+        {
+            stateMachine = currentlyBuiltPlayer.gameObject.AddComponent<PlayerStateMachine>();
+        }
+
         // Optionally deactivate the GameObject during setup
         playerGO.SetActive(false);
     }
@@ -134,7 +141,7 @@ public class PlayerBuilder : MonoBehaviour
         navMeshAgent.speed = 10;
         navMeshAgent.acceleration = 5;
         navMeshAgent.angularSpeed = 170;
-        //navMeshAgent.autoBraking = false;
+        navMeshAgent.autoBraking = true;
 
         // Ensure PlayerController exists
         PlayerController playerController = currentlyBuiltPlayer.GetComponent<PlayerController>();
