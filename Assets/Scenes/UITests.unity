@@ -10357,10 +10357,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayableCharacter
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 812769227117502504, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+=======
+<<<<<<< Updated upstream
+=======
+    - target: {fileID: 812769227117502504, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
+      propertyPath: m_IsActive
+<<<<<<< Updated upstream
+=======
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526956446644544908, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
+      propertyPath: m_IsActive
+>>>>>>> Stashed changes
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     - target: {fileID: 3334778090298028668, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.26
@@ -10845,6 +10862,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2461974042590413512, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461974042590413512, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5133690205613065959, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
       propertyPath: m_Name
       value: Splatgun
@@ -10852,6 +10877,14 @@ PrefabInstance:
     - target: {fileID: 5133690205613065959, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952365236769618189, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952365236769618189, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7553044007615136885, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
       propertyPath: m_LocalPosition.x
