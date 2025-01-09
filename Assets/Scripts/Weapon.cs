@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     ParticleSystem weaponParticleSystem;
     float maxAmunitionCapacity = 100;
     float amunition;
+    IEnumerator shootingCoroutine;
+    IEnumerator reloadingCoroutine;
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,19 +26,36 @@ public class Weapon : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+        //ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
         //if (particles == null)
         //{
         //    Debug.LogError("particles Dont Exist");
         //}
         //Debug.Log(particles);
-        //Renderer renderer= particles.gameObject.GetComponent<Renderer>();
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
         //if (renderer.material.HasProperty("_Color"))
         //{
         //    renderer.material.SetColor("_Color", color);
         //}
         //renderer.material = new Material(renderer.material);
-        //renderer.material.color = color;
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = color;
+        }
+
+        ParticleSystem[] particleSystems= GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            var trails = particleSystem.trails;
+            ParticleSystemRenderer particleSystemRenderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+            if (trails.enabled) 
+            {
+                Debug.Log(trails.enabled);
+                particleSystemRenderer.material.color = color;
+            }
+            
+        }
         //particles.gameObject.GetComponent<Renderer>().material.color = color;
         ParticleCollision particleCollision = GetComponentInChildren<ParticleCollision>();
         particleCollision.PaintColor = color;
@@ -46,25 +65,27 @@ public class Weapon : MonoBehaviour
         Debug.Log(shotCommand);
         if (amunition > 0)
         {
+            shootingCoroutine = RemoveAmunition();
             shotCommand.Execute();
-            StartCoroutine(RemoveAmunition());
+            StartCoroutine(shootingCoroutine);
         }
     }
 
     public void StopShooting()
     {
         shotCommand.Undo();
-        StopCoroutine(RemoveAmunition());
+        StopCoroutine(shootingCoroutine);
     }
 
     public void Reload()
     {
-        StartCoroutine(ReloadAmunition());
+        reloadingCoroutine = ReloadAmunition();
+        StartCoroutine(reloadingCoroutine);
     }
 
     public void StopReloading()
     {
-        StopCoroutine(ReloadAmunition());
+        StopCoroutine(reloadingCoroutine);
     }
 
     public IEnumerator ReloadAmunition()

@@ -1293,7 +1293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328659959}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09207885, y: 0.000000029675721, z: -0.0000000027441642, w: 0.99575174}
+  m_LocalRotation: {x: 0.10410988, y: 0.0000000305526, z: -0.0000000031982064, w: 0.99456584}
   m_LocalPosition: {x: -1.8066615, y: 2.5110002, z: 11.658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9129,7 +9129,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136385240}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1136385242
 Camera:
   m_ObjectHideFlags: 0
@@ -27141,6 +27141,9 @@ MonoBehaviour:
   inputManager: {fileID: 61874239}
   color: {r: 1, g: 0.5773492, b: 0, a: 0}
   cinemachineCamera: {fileID: 1974406911}
+  path: {fileID: 0}
+  nBots: 0
+  nPlayers: 0
 --- !u!114 &1774239707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27393,7 +27396,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880218843}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &1880218845
 Camera:
   m_ObjectHideFlags: 0
@@ -27453,7 +27456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880218843}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09207885, y: 0.000000029675721, z: -0.0000000027441642, w: 0.99575174}
+  m_LocalRotation: {x: 0.10410988, y: 0.0000000305526, z: -0.0000000031982064, w: 0.99456584}
   m_LocalPosition: {x: -1.8066615, y: 2.5110002, z: 11.658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -28486,27 +28489,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1844947509033758787, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99575174
+      value: 0.99456584
       objectReference: {fileID: 0}
     - target: {fileID: 1844947509033758787, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.09207884
+      value: 0.10410986
       objectReference: {fileID: 0}
     - target: {fileID: 1844947509033758787, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000029675718
+      value: 0.000000007410094
       objectReference: {fileID: 0}
     - target: {fileID: 1844947509033758787, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000027441638
+      value: -7.7567897e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4529543032047229112, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99267274
+      value: 0.9897855
       objectReference: {fileID: 0}
     - target: {fileID: 4529543032047229112, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.12083382
+      value: 0.14256503
       objectReference: {fileID: 0}
     - target: {fileID: 4976234415532556794, guid: abaf1b56cc644294cb4ca659cfac5c23, type: 3}
       propertyPath: m_LocalPosition.x
