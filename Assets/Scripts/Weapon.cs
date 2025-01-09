@@ -25,7 +25,19 @@ public class Weapon : MonoBehaviour
     public void SetColor(Color color)
     {
         ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
-        particles.gameObject.GetComponent<Renderer>().material.color = color;
+        //if (particles == null)
+        //{
+        //    Debug.LogError("particles Dont Exist");
+        //}
+        //Debug.Log(particles);
+        //Renderer renderer= particles.gameObject.GetComponent<Renderer>();
+        //if (renderer.material.HasProperty("_Color"))
+        //{
+        //    renderer.material.SetColor("_Color", color);
+        //}
+        //renderer.material = new Material(renderer.material);
+        //renderer.material.color = color;
+        //particles.gameObject.GetComponent<Renderer>().material.color = color;
         ParticleCollision particleCollision = GetComponentInChildren<ParticleCollision>();
         particleCollision.PaintColor = color;
     }
@@ -59,7 +71,7 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(amunition);
+            //Debug.Log(amunition);
             amunition++;
             if (amunition >= maxAmunitionCapacity)
             {
@@ -74,7 +86,7 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(amunition);
+            //Debug.Log(amunition);
             amunition--;
             if (amunition <= 0)
             {

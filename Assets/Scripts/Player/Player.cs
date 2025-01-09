@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     {
         PlayerColor = Color.black;
         PaintManager = PaintManager.Instance();
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -87,7 +88,7 @@ public class Player : MonoBehaviour
         {
             PlayerDeath();
         }
-        //Debug.Log(health);
+        Debug.Log(health);
     }
 
     public void RestoreHealth(float heal)
@@ -148,7 +149,7 @@ public class Player : MonoBehaviour
     void PlayerDeath()
     {
         gameObject.SetActive(false);
-        StartCoroutine("DeathCoroutine");
+        StartCoroutine(DeathCoroutine());
     }
 
     IEnumerator DeathCoroutine()
@@ -156,5 +157,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(deathTime);
         gameObject.transform.position = SpawnPoint;
         gameObject.SetActive(true);
+        health = maxHealth;
     }
 }

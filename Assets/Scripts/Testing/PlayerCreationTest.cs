@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerCreationTest : MonoBehaviour
 {
@@ -11,16 +12,24 @@ public class PlayerCreationTest : MonoBehaviour
     [SerializeField] Color color;
     [SerializeField] GameObject cinemachineCamera;
     [SerializeField] Path path;
+    [SerializeField] int nBots;
+    [SerializeField] int nPlayers;
     void Start()
     {
         builder = GetComponent<PlayerBuilder>();
-        //BuildTestPlayer();
-        BuildTestEnemy();
+        for (int i = 0; i < nBots; i++) 
+        {
+            BuildTestEnemy(new Vector3(48, 0, -21.5f));
+        }
+        for (int i = 0; i < nPlayers; i++)
+        {
+            BuildTestPlayer(new Vector3(47.5f, 0, -47.5f));
+        }
     }
 
-    void BuildTestPlayer()
+    void BuildTestPlayer(Vector3 position)
     {
-        builder.StartCreatingPlayer(Vector3.zero);
+        builder.StartCreatingPlayer(position);
         builder.AddCamera2Player(cinemachineCamera);
         builder.AddInputManager(inputManager);
         builder.AssignColor2Player(color);
@@ -28,9 +37,9 @@ public class PlayerCreationTest : MonoBehaviour
         builder.BuildPlayer();
     }
 
-    void BuildTestEnemy()
+    void BuildTestEnemy(Vector3 position)
     {
-        builder.StartCreatingPlayer();
+        builder.StartCreatingPlayer(position);
         builder.AssignColor2Player(color);
         builder.AssignWeapon2Player(weaponPrefab);
         builder.AddEnemyController(path);

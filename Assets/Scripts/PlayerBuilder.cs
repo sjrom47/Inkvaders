@@ -14,10 +14,11 @@ public class PlayerBuilder : MonoBehaviour
     {
         if (currentlyBuiltPlayer != null)
         {
-            Destroy(currentlyBuiltPlayer.gameObject);
+            //Destroy(currentlyBuiltPlayer.gameObject);
+            currentlyBuiltPlayer = null;
         }
         // Instantiate the prefab
-        GameObject playerGO = Instantiate(playerPrefab, new Vector3(48, 2, -21.5f), Quaternion.identity);
+        GameObject playerGO = Instantiate(playerPrefab, position, Quaternion.identity);
 
         // Get the Player component for configuration
         currentlyBuiltPlayer = playerGO.GetComponent<Player>();
