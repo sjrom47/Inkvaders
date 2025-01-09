@@ -20,7 +20,7 @@ public class PlayerCreationTest : MonoBehaviour
 
     void BuildTestPlayer()
     {
-        builder.StartCreatingPlayer();
+        builder.StartCreatingPlayer(Vector3.zero);
         builder.AddCamera2Player(cinemachineCamera);
         builder.AddInputManager(inputManager);
         builder.AssignColor2Player(color);

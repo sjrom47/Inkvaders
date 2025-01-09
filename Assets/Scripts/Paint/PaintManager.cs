@@ -58,10 +58,11 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
 
     }
 
-    private void OnGameEnd()
+    public Dictionary<Color,int> OnGameEnd()
     {
         // TODO: create the event to calculate the amount of paint of each team and notify the GameManager
         Dictionary<Color, int> colorCounts = GetAllColorCounts();
+        return colorCounts;
     }
 
     

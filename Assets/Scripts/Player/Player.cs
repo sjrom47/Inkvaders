@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     public Color PlayerColor { get; set; }
     public PaintManager PaintManager { get; set; }
+    public Vector3 SpawnPoint { get; set; }
+    [SerializeField] float deathTime = 5f;
 
     // Health
     private float health;
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour
         //    }
         //    if (floorColor != PlayerColor && floorColor != Color.black)
         //    {
-        //        // Debería recibir daño
+        //        // Deberï¿½a recibir daï¿½o
 
         //    }
         //}
@@ -80,6 +82,10 @@ public class Player : MonoBehaviour
         {
             durationTimer = 0;
             damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 1);
+        }
+        if (health <= 0)
+        {
+            PlayerDeath();
         }
         //Debug.Log(health);
     }
@@ -139,4 +145,16 @@ public class Player : MonoBehaviour
         StopReloading?.Invoke();
     }
 
+    void PlayerDeath()
+    {
+        gameObject.SetActive(false);
+        StartCoroutine("DeathCoroutine");
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(deathTime);
+        gameObject.transform.position = SpawnPoint;
+        gameObject.SetActive(true);
+    }
 }
