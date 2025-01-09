@@ -126,7 +126,8 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
 
     public Color GetColorOfFloor(Vector3 position)
     {
-        RaycastResult collision = collisionHandler.FindCollisionPoint(position, Vector3.down);
+        RaycastResult collision = collisionHandler.FindCollisionPoint(position, position.y >= 0 ? Vector3.down : Vector3.up);
+
         if (collisionHandler.CollisionIsTexture(collision))
         {
             
@@ -148,8 +149,6 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
                 return pixelColor;
             }
         }
-        
-
 
         return Color.black;
     }

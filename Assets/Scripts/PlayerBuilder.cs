@@ -46,6 +46,8 @@ public class PlayerBuilder : MonoBehaviour
         if (currentlyBuiltPlayer == null) return;
 
         currentlyBuiltPlayer.PlayerColor = color;
+        Debug.Log(currentlyBuiltPlayer.PlayerColor);
+        Debug.Log(color);
 
         // Apply the color to other dependent components if needed
         WeaponHolder weaponHolder = currentlyBuiltPlayer.GetComponentInChildren<WeaponHolder>();
