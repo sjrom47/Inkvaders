@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public class PlayerStateMachine : MonoBehaviour, IStateMachine
 {
-    public BaseState activeState;
+    public PlayerBaseState activeState;
     public void Initialize()
     {
-        ChangeState(new PatrolState());
+        ChangeState(new PlayerNothingState());
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class StateMachine : MonoBehaviour
         }
     }
 
-    public void ChangeState(BaseState newState)
+    public void ChangeState(PlayerBaseState newState)
     {
         if (activeState != null) // clean activeState if any
         {
@@ -37,7 +37,7 @@ public class StateMachine : MonoBehaviour
         if (activeState != null)
         {
             activeState.stateMachine = this; // set up new state
-            activeState.enemy = GetComponent<Enemy>();
+            activeState.player = GetComponent<Player>();
             activeState.Enter(); // assign state
         }
     }

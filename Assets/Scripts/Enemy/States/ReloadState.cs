@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AtackState : BaseEnemyState
+public class ReloadState : BaseEnemyState
 {
     private float moveTimer;
     private float losePlayerTimer;
@@ -13,7 +13,7 @@ public class AtackState : BaseEnemyState
     }
     public override void Perform()
     {
-        if (enemy.CanSeePlayer()) 
+        if (enemy.CanSeePlayer())
         {
             losePlayerTimer = 0;
             moveTimer += Time.deltaTime;

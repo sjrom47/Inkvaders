@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerBuilder : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class PlayerBuilder : MonoBehaviour
     {
         if (currentlyBuiltPlayer != null)
         {
-            Destroy(currentlyBuiltPlayer.gameObject);
+            //Destroy(currentlyBuiltPlayer.gameObject);
+            currentlyBuiltPlayer = null;
         }
         // Instantiate the prefab
-        GameObject playerGO = Instantiate(playerPrefab);
+        GameObject playerGO = Instantiate(playerPrefab, position, Quaternion.identity);
 
         // Get the Player component for configuration
         currentlyBuiltPlayer = playerGO.GetComponent<Player>();
@@ -108,6 +110,49 @@ public class PlayerBuilder : MonoBehaviour
             cameraRotationController.SetPlayerTransform(playerTransform);
         }
     }
+
+    public void AddEnemyController(Path path)
+    {
+        if (currentlyBuiltPlayer == null) return;
+
+        // Ensure StateMachine exists
+        EnemyStateMachine stateMachine = currentlyBuiltPlayer.GetComponent<EnemyStateMachine>();
+        if (stateMachine == null)
+        {
+            stateMachine = currentlyBuiltPlayer.gameObject.AddComponent<EnemyStateMachine>();
+        }
+
+        // Ensure NavMeshAgent exists
+        NavMeshAgent navMeshAgent = currentlyBuiltPlayer.GetComponent<NavMeshAgent>();
+        if (navMeshAgent == null)
+        {
+            navMeshAgent = currentlyBuiltPlayer.gameObject.AddComponent<NavMeshAgent>();
+        }
+
+        navMeshAgent.radius = 0.4f;
+        navMeshAgent.height = 2;
+        navMeshAgent.speed = 10;
+        navMeshAgent.acceleration = 5;
+        navMeshAgent.angularSpeed = 170;
+        //navMeshAgent.autoBraking = false;
+
+        // Ensure PlayerController exists
+        PlayerController playerController = currentlyBuiltPlayer.GetComponent<PlayerController>();
+        if (playerController == null)
+        {
+            playerController = currentlyBuiltPlayer.gameObject.AddComponent<PlayerController>();
+        }
+
+        // Ensure Enemy exists
+        Enemy enemy = currentlyBuiltPlayer.GetComponent<Enemy>();
+        if (enemy == null)
+        {
+            enemy = currentlyBuiltPlayer.gameObject.AddComponent<Enemy>();
+        }
+
+        enemy.path = path;
+    }
+
     public Player BuildPlayer()
     {
         if (currentlyBuiltPlayer != null)
