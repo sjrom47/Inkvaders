@@ -44,17 +44,40 @@ public class Weapon : MonoBehaviour
             renderer.material.color = color;
         }
 
-        ParticleSystem[] particleSystems= GetComponentsInChildren<ParticleSystem>();
+        //ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+        //foreach (ParticleSystem particleSystem in particleSystems)
+        //{
+        //    var trails = particleSystem.trails;
+        //    ParticleSystemRenderer particleSystemRenderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+        //    if (trails.enabled)
+        //    {
+        //        Debug.Log(trails.enabled);
+        //        particleSystemRenderer.material.SetColor("_Color", color);
+        //    }
+
+        //}
+        //Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        //foreach (Renderer renderer in renderers)
+        //{
+        //    // Create a material instance for each renderer
+        //    Material materialInstance = new Material(renderer.sharedMaterial);
+        //    renderer.material = materialInstance;
+        //    materialInstance.color = color;
+        //}
+
+        // For particle systems
+        ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem particleSystem in particleSystems)
         {
             var trails = particleSystem.trails;
             ParticleSystemRenderer particleSystemRenderer = particleSystem.GetComponent<ParticleSystemRenderer>();
-            if (trails.enabled) 
+            if (trails.enabled)
             {
-                Debug.Log(trails.enabled);
-                particleSystemRenderer.material.color = color;
+                // Create new material instance for the trails
+                Material trailMaterialInstance = new Material(particleSystemRenderer.trailMaterial);
+                particleSystemRenderer.trailMaterial = trailMaterialInstance;
+                trailMaterialInstance.SetColor("_Color", color);
             }
-            
         }
         //particles.gameObject.GetComponent<Renderer>().material.color = color;
         ParticleCollision particleCollision = GetComponentInChildren<ParticleCollision>();
