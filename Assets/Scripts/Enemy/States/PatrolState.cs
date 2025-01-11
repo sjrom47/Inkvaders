@@ -8,7 +8,7 @@ public class PatrolState : BaseEnemyState
     public float waitTimer;
     public override void Enter()
     {
-        
+        enemy.PlayerController.WeaponHolder.TryStopShoot();
     }
     public override void Perform()
     {
@@ -16,6 +16,10 @@ public class PatrolState : BaseEnemyState
         if (enemy.CanSeePlayer())
         {
             stateMachine.ChangeState(new AtackState());
+        }
+        else if (enemy.PlayerController.WeaponHolder.GetCurrentWeapon().Amunition() <= 0)
+        {
+            stateMachine.ChangeState(new ReloadState());
         }
     }
     public override void Exit()
@@ -38,14 +42,12 @@ public class PatrolState : BaseEnemyState
                     waypointindex = 0;
                 }
                 enemy.Agent.SetDestination(enemy.path.waypoints[waypointindex].position);
-                enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
-                enemy.PlayerController.WeaponHolder.TryShoot();
+                enemy.PlayerController.AnimController.Animate(Direction.FORWARD, false);
                 waitTimer = 0;
             }
             else
             {
-                enemy.PlayerController.AnimController.Animate(Direction.NONE, true);
-                enemy.PlayerController.WeaponHolder.TryShoot();
+                enemy.PlayerController.AnimController.Animate(Direction.NONE, false);
             }
         }
     }

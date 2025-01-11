@@ -9,25 +9,20 @@ public class ReloadState : BaseEnemyState
 
     public override void Enter()
     {
-
+        enemy.Agent.SetDestination(enemy.path.waypoints[0].position);
+        enemy.PlayerController.AnimController.Animate(Direction.FORWARD, false);
+        enemy.PlayerController.WeaponHolder.TryStopShoot();
     }
     public override void Perform()
     {
-        if (enemy.CanSeePlayer())
+        if (enemy.PlayerController.WeaponHolder.GetCurrentWeapon().Amunition() >= 50) 
         {
-            losePlayerTimer = 0;
-            moveTimer += Time.deltaTime;
-            if (moveTimer > Random.Range(3, 7))
+
+            if (enemy.CanSeePlayer())
             {
-                enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 5));
-                enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
-                moveTimer = 0;
+                stateMachine.ChangeState(new AtackState());
             }
-        }
-        else
-        {
-            losePlayerTimer += Time.deltaTime;
-            if (losePlayerTimer > 5)
+            else
             {
                 stateMachine.ChangeState(new PatrolState());
             }

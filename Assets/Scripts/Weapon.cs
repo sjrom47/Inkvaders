@@ -24,6 +24,11 @@ public class Weapon : MonoBehaviour
         
     }
 
+    public float Amunition()
+    {
+        return amunition;
+    }
+
     public void SetColor(Color color)
     {
         //ParticleSystem particles = GetComponentInChildren<ParticleSystem>();

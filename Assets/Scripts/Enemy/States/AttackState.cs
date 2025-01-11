@@ -21,8 +21,13 @@ public class AtackState : BaseEnemyState
         {
             losePlayerTimer = 0;
             enemy.transform.LookAt(enemy.lastSeenEnemyPlayer.transform.position);
-            enemy.Agent.SetDestination(enemy.lastSeenEnemyPlayer.transform.position);
-            enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
+            enemy.Agent.SetDestination(enemy.transform.position);
+            enemy.PlayerController.AnimController.Animate(Direction.NONE, true);
+            enemy.PlayerController.WeaponHolder.TryShoot();
+        }
+        else if (enemy.PlayerController.WeaponHolder.GetCurrentWeapon().Amunition() <= 0)
+        {
+            stateMachine.ChangeState(new ReloadState());
         }
         else
         {
@@ -30,6 +35,11 @@ public class AtackState : BaseEnemyState
             if (losePlayerTimer > 5)
             {
                 stateMachine.ChangeState(new PatrolState());
+            }
+            else 
+            {
+                enemy.PlayerController.AnimController.Animate(Direction.NONE, false);
+                enemy.PlayerController.WeaponHolder.TryStopShoot();
             }
         }
     }
