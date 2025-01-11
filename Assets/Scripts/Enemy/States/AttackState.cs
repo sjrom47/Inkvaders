@@ -17,7 +17,7 @@ public class AtackState : BaseEnemyState
         {
             stateMachine.ChangeState(new PatrolState());
         }
-        else if (enemy.CanSeePlayer() && !enemy.lastSeenEnemyPlayer.IsDead) 
+        else if (enemy.CanSeePlayer()) 
         {
             losePlayerTimer = 0;
             enemy.transform.LookAt(enemy.lastSeenEnemyPlayer.transform.position);
