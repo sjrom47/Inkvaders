@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InformationContainer<T> : MonoBehaviour , IInformationContainer
+public abstract class InformationContainer : MonoBehaviour 
 {
     // Start is called before the first frame update
-    public T Content { get;set; }
+    
     public string ContentTag { get;set; }   
     void Awake()
     {

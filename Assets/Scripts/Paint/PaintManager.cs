@@ -16,25 +16,14 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
     {
         colorCounter = new ColorCounter();
         allPaintedSurfaces = new List<PaintedSurface>();
-        // TODO: see if this should be a singleton a static class or something else
+        
         collisionHandler = CollisionHandler.Instance();
         
     }
 
     
 
-    private IEnumerator PaintPercentageCorroutine()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            var colorCounts = GetAllColorCounts();
-            foreach (var color in colorCounts)
-            {
-                Debug.Log(color);
-            }
-            yield return new WaitForSeconds(3f);
-        }
-    }
+    
 
     private Dictionary<Color,int> GetAllColorCounts()
     {

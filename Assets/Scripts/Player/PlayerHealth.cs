@@ -18,7 +18,6 @@ public class PlayerHealth : MonoBehaviour
     {
         health = maxHealth;
         damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 0);
-        Debug.Log(health);
     }
 
     // Update is called once per frame

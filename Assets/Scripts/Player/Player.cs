@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public bool IsDead { get; private set; }
 
     // Damage Overlay
-    public Image damageOverlay;
+    Image damageOverlay;
     public float duration;
     public float fadeSpeed;
     private float durationTimer;
@@ -45,10 +45,14 @@ public class Player : MonoBehaviour
     {
         //PlayerColor = Color.black;
         //childrenComponents = gameObject.GetComponentsInChildren<GameObject>();
+        fadeSpeed = 1;
         PaintManager = PaintManager.Instance();
         health = maxHealth;
         stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine.Initialize();
+        damageOverlay = FindObjectOfType<Image>();
+        Debug.Log(damageOverlay);
+        damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 0);
     }
 
     // Update is called once per frame
@@ -62,8 +66,11 @@ public class Player : MonoBehaviour
                 if (durationTimer > 0)
                 {
                     float tempAlpha = damageOverlay.color.a;
+                    
                     tempAlpha -= Time.deltaTime * fadeSpeed;
+                    Debug.Log(tempAlpha);
                     damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, tempAlpha);
+                    //Debug.Log(damageOverlay.color);
                 }
             }
             UpdateHealthUI();
@@ -105,12 +112,12 @@ public class Player : MonoBehaviour
             lerpTimer = 0f;
             damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 1);
         }
-        if (health <= 0)
+        if (health <= 0 && !IsDead)
         {
             PlayerDeath();
             //StopTakeConstantDamage();
         }
-        Debug.Log(health);
+        //Debug.Log(health);
     }
 
     public void RestoreHealth(float heal)
@@ -195,7 +202,7 @@ public class Player : MonoBehaviour
                     child.gameObject.SetActive(false);
                     break;
                 default:
-                    Debug.Log(child.GetType().Name);
+                    //Debug.Log(child.GetType().Name);
                     break;
             }
             // Deactivate the child GameObject

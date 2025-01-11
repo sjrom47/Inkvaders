@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class WeaponLoader : IContainerLoader
 {
-    public void LoadInformationContainer(IInformationContainer container)
+    public void LoadInformationContainer(InformationContainer container)
     {
-        InformationContainer<GameObject> weaponContainer = (InformationContainer<GameObject>)container ;
+        GameObjectInformationContainer weaponContainer = (GameObjectInformationContainer)container ;
+        Debug.LogWarning(weaponContainer.ToString());
         GameManager.Instance().SetChosenWeapon(weaponContainer.Content);
     }
 }

@@ -7,7 +7,7 @@ public class MenuScript : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("FirstMap");
+        SceneManager.LoadScene("UITests");
     }
 
     public void QuitGame()

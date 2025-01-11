@@ -12,6 +12,9 @@ public class Team : MonoBehaviour
     List<Player> teamMembers;
     PlayerBuilder builder;
     GameObject weaponPrefab;
+    GameObject cinemachineCamera;
+    List<Path> paths;
+    InputManager inputManager;
     Color color;
     int members = 3;
     public int Members { get { return members; } set { members = value; } }
@@ -36,29 +39,43 @@ public class Team : MonoBehaviour
         return color;
     }
 
-    public void createTeamMembers(bool hasPlayablePlayer, Vector3 spawnPosition, GameObject cinemachineCamera, List<Path> paths) 
+    public void SetCinemachine(GameObject cinemachineCamera)
+    {
+        this.cinemachineCamera = cinemachineCamera;
+    }
+
+    public void SetPaths(List<Path> paths)
+    {
+        this.paths = paths;
+    }
+
+    public void SetInputManager(InputManager inputManager)
+    {
+        this.inputManager = inputManager;
+    }
+
+    public void createTeamMembers(bool hasPlayablePlayer, Vector3 spawnPosition) 
     {
         if (hasPlayablePlayer) 
         {
             
-            CreatePlayableCharacter(spawnPosition, cinemachineCamera);
+            CreatePlayableCharacter(spawnPosition);
         }
         for (int i = 0; i < (hasPlayablePlayer ? members - 1 : members); i++)
         {
             //TODO: modify spawn position slightly for AI based on index
             Path path = paths[i];
-            Vector3 newSpawnPosition = new Vector3(spawnPosition.x + Mathf.Pow(-1,i)*10*(float)(int)(i/2), spawnPosition.y, spawnPosition.z);
+            Vector3 newSpawnPosition = new Vector3(spawnPosition.x + Mathf.Pow(-1,i)*2*((float)(int)(i/2)+1), spawnPosition.y, spawnPosition.z);
 
             CreateAIPlayer(newSpawnPosition, path);
         }
     }
 
-    void CreatePlayableCharacter(Vector3 spawnPosition, GameObject cinemachineCamera)
-    {
-        // TODO: check if the input manager can be searched with GetComponent
+    void CreatePlayableCharacter(Vector3 spawnPosition)
+    {   
         builder.StartCreatingPlayer(spawnPosition);
         builder.AddCamera2Player(cinemachineCamera);
-        builder.AddInputManager(GetComponent<InputManager>());
+        builder.AddInputManager(inputManager);
         builder.AssignColor2Player(color);
         builder.AssignWeapon2Player(weaponPrefab);
         teamMembers.Add(builder.BuildPlayer());

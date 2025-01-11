@@ -10,7 +10,7 @@ public class ButtonGroupLogic : MonoBehaviour
     
     private Button[] buttons;
     private int selectedButtonIndex = -1;
-    private InformationContainer<GameObject> menuContainer;
+    [SerializeField] GameObjectInformationContainer menuContainer;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class ButtonGroupLogic : MonoBehaviour
             int buttonIndex = i; // Preserve the index for the lambda
             buttons[i].onClick.AddListener(() => OnButtonClick(buttonIndex));
         }
-        menuContainer = GetComponent<InformationContainer<GameObject>>();
+        
         menuContainer.ContentTag = gameObject.name;
         // Optionally select the first button by default
         if (buttons.Length > 0)
@@ -35,17 +35,19 @@ public class ButtonGroupLogic : MonoBehaviour
 
     void OnButtonClick(int index)
     {
-        
+        SetChosenWeapon(index);
         SelectButton(index);
+        
     }
 
     void SetChosenWeapon(int index)
     {
         WeaponButton weaponButton = buttons[index].GetComponent<WeaponButton>();
-
-        if (weaponButton != null && weaponButton.WeaponPrefab != null)
+        
+        if (weaponButton != null && weaponButton.GetWeaponPrefab() != null)
         {
-            menuContainer.Content = weaponButton.WeaponPrefab; 
+            
+            menuContainer.Content = weaponButton.GetWeaponPrefab(); 
         }
         
     }

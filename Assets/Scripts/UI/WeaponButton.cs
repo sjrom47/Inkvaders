@@ -5,5 +5,8 @@ using UnityEngine;
 public class WeaponButton : MonoBehaviour
 {
     [SerializeField] GameObject weaponPrefab;
-    public GameObject WeaponPrefab { get; private set; }
+    public GameObject GetWeaponPrefab()
+    {
+        return weaponPrefab;
+    }
 }

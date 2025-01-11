@@ -42,7 +42,7 @@ public class SquidTransformCommand : Command
         {
             skinnedMeshRenderer.enabled = true;
         }
-        weaponMeshRenderer.enabled = false;
+        weaponMeshRenderer.enabled = true;
         playerHitbox.SetActive(true);
         squid.SetActive(false);
         squidHitbox.SetActive(false);

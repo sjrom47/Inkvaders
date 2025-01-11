@@ -13,16 +13,9 @@ public class AnimationController : MonoBehaviour
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
-        PrintExistingParameters();
     }
 
-    void PrintExistingParameters()
-    {
-        foreach (AnimatorControllerParameter param in anim.parameters)
-        {
-            Debug.Log($"Available parameter: {param.name}");
-        }
-    }
+    
 
     
     public void Animate(Direction direction, bool isShooting)
