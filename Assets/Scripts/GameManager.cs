@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField] Transform playerSpawn;
     [SerializeField] Transform enemySpawn;
     [SerializeField] GameObject team;
+    [SerializeField] InputManager inputManager;
+    [SerializeField] GameObject chosenWeapon;
     //SaveDataHandler saveDataHandler;
 
 
-    GameObject chosenWeapon;
+
     Team playerTeam;
     Team enemyTeam;
     Dictionary<string, IContainerLoader> containerLoaders;
@@ -56,13 +58,19 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         // create the teams
         playerTeam = Instantiate(team).GetComponent<Team>();
         playerTeam.SetTeamColor(playerTeamColor);
+        Debug.Log(chosenWeapon);
         playerTeam.SetTeamWeapon(chosenWeapon);
-        playerTeam.createTeamMembers(true, playerSpawn.position, cinemachineCamera, paths);
+        playerTeam.SetCinemachine(cinemachineCamera);
+        playerTeam.SetPaths(paths);
+        playerTeam.SetInputManager(inputManager);
+        playerTeam.createTeamMembers(true, playerSpawn.position);
 
         enemyTeam = Instantiate(team).GetComponent<Team>();
         enemyTeam.SetTeamColor(enemyTeamColor);
         enemyTeam.SetTeamWeapon(chosenWeapon);
-        enemyTeam.createTeamMembers(false, enemySpawn.position, cinemachineCamera, paths);
+        enemyTeam.SetCinemachine(cinemachineCamera);
+        enemyTeam.SetPaths(paths);
+        enemyTeam.createTeamMembers(false, enemySpawn.position);
 
 
 
@@ -72,10 +80,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         OnGameStart?.Invoke();
     }
 
-    private void OnDestroy()
-    {
-        timer.OnGameEnd -= OnGameEnd;
-    }
 
     void OnGameEnd()
     {
@@ -85,6 +89,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         string message = winningTeam == playerTeam ? "You won this battle" : "You lost this battle";
         // show the text
         ShowWinner?.Invoke(message);
+        timer.OnGameEnd -= OnGameEnd;
         SceneManager.LoadScene("Menu");
     }
 
