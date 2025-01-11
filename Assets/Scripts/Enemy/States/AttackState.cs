@@ -13,16 +13,16 @@ public class AtackState : BaseEnemyState
     }
     public override void Perform()
     {
-        if (enemy.CanSeePlayer()) 
+        if (enemy.lastSeenEnemyPlayer.IsDead)
+        {
+            stateMachine.ChangeState(new PatrolState());
+        }
+        else if (enemy.CanSeePlayer() && !enemy.lastSeenEnemyPlayer.IsDead) 
         {
             losePlayerTimer = 0;
-            moveTimer += Time.deltaTime;
-            if (moveTimer > Random.Range(3, 7))
-            {
-                enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 5));
-                enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
-                moveTimer = 0;
-            }
+            enemy.transform.LookAt(enemy.lastSeenEnemyPlayer.transform.position);
+            enemy.Agent.SetDestination(enemy.lastSeenEnemyPlayer.transform.position);
+            enemy.PlayerController.AnimController.Animate(Direction.FORWARD, true);
         }
         else
         {
