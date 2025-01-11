@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IContainerLoader 
 {
-    public void LoadInformationContainer(IInformationContainer container);
+    public void LoadInformationContainer(InformationContainer container);
 }

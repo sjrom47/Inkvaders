@@ -9835,7 +9835,7 @@ MonoBehaviour:
   - {fileID: 36966725}
   - {fileID: 354909097}
   cinemachineCamera: {fileID: 190754362}
-  gameLength: 200
+  gameLength: 20
   playerTeamColor: {r: 0.082237005, g: 1, b: 0, a: 1}
   enemyTeamColor: {r: 1, g: 0, b: 0.9655819, a: 1}
   timer: {fileID: 28306872}

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     Team playerTeam;
     Team enemyTeam;
     Dictionary<string, IContainerLoader> containerLoaders;
+    List<InformationContainer> infoContainers;
     public event Action OnGameStart;
     public event Action<string> ShowWinner;
     void Awake()
@@ -37,10 +38,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         // Done like this so we can add more containers without modyfying the class (open-close)
         containerLoaders = new Dictionary<string, IContainerLoader>() { {"Weapon", new WeaponLoader() } };
 
-        List<IInformationContainer> infoContainers = FindObjectsOfType<MonoBehaviour>().OfType<IInformationContainer>().ToList();
-        foreach (IInformationContainer container in infoContainers)
+        infoContainers = FindObjectsOfType<MonoBehaviour>().OfType<InformationContainer>().ToList();
+        Debug.LogWarning(infoContainers);
+        Debug.LogWarning(infoContainers.Count);
+        foreach (InformationContainer container in infoContainers)
         {
-            if (container is InformationContainer<object> infoContainer)
+            
+            if (container is InformationContainer infoContainer)
             {
                 string tag = infoContainer.ContentTag;
                 if (containerLoaders.ContainsKey(tag))
@@ -81,6 +85,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
 
 
+
     void OnGameEnd()
     {
         Dictionary<Color,int> colorCounts = PaintManager.Instance().OnGameEnd();
@@ -90,6 +95,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         // show the text
         ShowWinner?.Invoke(message);
         timer.OnGameEnd -= OnGameEnd;
+        StartCoroutine(LoadMenuCoroutine());
+        //SceneManager.LoadScene("Menu");
+    }
+    IEnumerator LoadMenuCoroutine()
+    {
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene("Menu");
     }
 

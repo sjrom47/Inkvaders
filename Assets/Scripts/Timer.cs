@@ -34,10 +34,11 @@ public class Timer : MonoBehaviour
 
         }
         TimeLeft = 0;
+        textMeshProUGUI.text = string.Format("{0:00}:{1:00}", 0, 0);
         OnGameEnd?.Invoke();
 
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         GameManager.Instance().OnGameStart -= OnGameStart;
     }
