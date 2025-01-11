@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     {
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
-        Debug.LogError(currentState);
+        //Debug.LogError(currentState);
     }
 
     public bool CanSeePlayer()
