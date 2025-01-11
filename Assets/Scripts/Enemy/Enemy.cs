@@ -35,7 +35,6 @@ public class Enemy : MonoBehaviour
     {
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
-        //Debug.LogError(currentState);
     }
 
     public bool CanSeePlayer()
@@ -71,7 +70,6 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        //Debug.Log("Va a devolver false");
         return false;
     }
 }

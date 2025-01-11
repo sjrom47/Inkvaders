@@ -31,44 +31,12 @@ public class Weapon : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        //ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
-        //if (particles == null)
-        //{
-        //    Debug.LogError("particles Dont Exist");
-        //}
-        //Debug.Log(particles);
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
-        //if (renderer.material.HasProperty("_Color"))
-        //{
-        //    renderer.material.SetColor("_Color", color);
-        //}
-        //renderer.material = new Material(renderer.material);
         foreach (Renderer renderer in renderers)
         {
             renderer.material.color = color;
         }
-
-        //ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
-        //foreach (ParticleSystem particleSystem in particleSystems)
-        //{
-        //    var trails = particleSystem.trails;
-        //    ParticleSystemRenderer particleSystemRenderer = particleSystem.GetComponent<ParticleSystemRenderer>();
-        //    if (trails.enabled)
-        //    {
-        //        Debug.Log(trails.enabled);
-        //        particleSystemRenderer.material.SetColor("_Color", color);
-        //    }
-
-        //}
-        //Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //foreach (Renderer renderer in renderers)
-        //{
-        //    // Create a material instance for each renderer
-        //    Material materialInstance = new Material(renderer.sharedMaterial);
-        //    renderer.material = materialInstance;
-        //    materialInstance.color = color;
-        //}
 
         // For particle systems
         ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
@@ -84,7 +52,7 @@ public class Weapon : MonoBehaviour
                 trailMaterialInstance.SetColor("_Color", color);
             }
         }
-        //particles.gameObject.GetComponent<Renderer>().material.color = color;
+
         ParticleCollision particleCollision = GetComponentInChildren<ParticleCollision>();
         particleCollision.PaintColor = color;
     }
@@ -129,7 +97,6 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log(amunition);
             amunition++;
             if (amunition >= maxAmunitionCapacity)
             {
@@ -144,7 +111,6 @@ public class Weapon : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log(amunition);
             amunition--;
             if (amunition <= 0)
             {

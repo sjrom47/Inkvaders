@@ -63,7 +63,6 @@ public class Team : MonoBehaviour
         }
         for (int i = 0; i < (hasPlayablePlayer ? members - 1 : members); i++)
         {
-            //TODO: modify spawn position slightly for AI based on index
             Path path = paths[i];
             Vector3 newSpawnPosition = new Vector3(spawnPosition.x + Mathf.Pow(-1,i)*2*((float)(int)(i/2)+1), spawnPosition.y, spawnPosition.z);
 

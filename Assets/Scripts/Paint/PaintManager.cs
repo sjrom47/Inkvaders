@@ -6,7 +6,6 @@ using static UnityEngine.EventSystems.EventTrigger;
 using UnityEngine.Rendering;
 
 
-// TODO: see if this should be a monobehaviour Singleton or a regular singleton
 public class PaintManager : MonoBehaviourSingleton<PaintManager>
 {
     ColorCounter colorCounter;
@@ -20,10 +19,6 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
         collisionHandler = CollisionHandler.Instance();
         
     }
-
-    
-
-    
 
     private Dictionary<Color,int> GetAllColorCounts()
     {
@@ -49,16 +44,12 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
 
     public Dictionary<Color,int> OnGameEnd()
     {
-        // TODO: create the event to calculate the amount of paint of each team and notify the GameManager
         Dictionary<Color, int> colorCounts = GetAllColorCounts();
         return colorCounts;
     }
 
-    
-
     public void PaintSurface(PaintedSurface surface, Vector3 pos, Vector3 normalVector,float radius, Color paintColor)
     {
-         // TODO: clean this function up
         if (!allPaintedSurfaces.Contains(surface))
         {
             allPaintedSurfaces.Add(surface);
@@ -97,18 +88,7 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
 
             // Apply all pixels at once
             floorTexture.SetPixels(colors);
-            //Color[] colorGrid = new Color[2*pixelRadius*4*pixelRadius];
-            //for (int i = 0; i < colorGrid.Length; i++)
-            //{
-            //    colorGrid[i] = paintColor;
-            //}
-            //Texture2D floorTexture = surface.GetFloorTexture();
-            //floorTexture.SetPixels((int)pixelCoords.x-pixelRadius, (int)pixelCoords.y -  pixelRadius, 2*pixelRadius, 2*pixelRadius, colorGrid);
             floorTexture.Apply(); // Apply changes to the texture
-
-            // Update the material with the new texture (if needed)
-            //Material material = surface.SurfaceRenderer.material;
-            //material.SetTexture("_Premade_mask", floorTexture);
 
         }
     }
@@ -128,13 +108,6 @@ public class PaintManager : MonoBehaviourSingleton<PaintManager>
                 Vector2 pixelCoords = collisionHandler.GetPixelCoords(collisionPoint);
                 Texture2D floorTexture = surface.GetFloorTexture();
                 Color pixelColor = floorTexture.GetPixel((int)pixelCoords.x, (int)pixelCoords.y);
-                //Color[] carray = new Color[400];
-                //for (int i = 0; i < carray.Length; i++)
-                //{
-                //    carray[i] = Color.red;
-                //}
-                //floorTexture.SetPixels((int)pixelCoords.x-10, (int)pixelCoords.y-10,20,20, carray);
-                //floorTexture.Apply();
                 return pixelColor;
             }
         }

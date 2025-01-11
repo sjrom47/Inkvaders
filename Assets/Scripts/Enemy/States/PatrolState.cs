@@ -8,7 +8,10 @@ public class PatrolState : BaseEnemyState
     public float waitTimer;
     public override void Enter()
     {
-        enemy.PlayerController.WeaponHolder.TryStopShoot();
+        if (enemy.PlayerController != null)
+        {
+            enemy.PlayerController.WeaponHolder.TryStopShoot();
+        }
     }
     public override void Perform()
     {
@@ -17,7 +20,7 @@ public class PatrolState : BaseEnemyState
         {
             stateMachine.ChangeState(new AtackState());
         }
-        else if (enemy.PlayerController.WeaponHolder.GetCurrentWeapon().Amunition() <= 0)
+        else if (enemy.PlayerController != null && enemy.PlayerController.WeaponHolder.GetCurrentWeapon().Amunition() <= 0)
         {
             stateMachine.ChangeState(new ReloadState());
         }
@@ -28,7 +31,7 @@ public class PatrolState : BaseEnemyState
     }
     public void PatrolCycle()
     {
-        if (enemy.Agent.remainingDistance < 0.2f)
+        if (enemy.Agent.remainingDistance < 0.2f && enemy.PlayerController != null)
         {
             waitTimer += Time.deltaTime;
             if (waitTimer > 0.3)

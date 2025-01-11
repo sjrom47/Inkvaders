@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -25,10 +26,11 @@ public class Player : MonoBehaviour
     private float durationTimer;
 
     // Health Bar
-    private float chipSpeed = 2f;
+    private float chipSpeed = 10f;
     private float lerpTimer;
-    public Image frontHealthBar;
-    public Image backHealthBar;
+    [SerializeField] Image frontHealthBar;
+    [SerializeField] Image backHealthBar;
+    [SerializeField] TextMeshProUGUI healthText;
 
     public bool IsSquid = false;
     public bool isReloading = false;
@@ -39,19 +41,20 @@ public class Player : MonoBehaviour
     private PlayerStateMachine stateMachine;
     GameObject[] childrenComponents;
     IEnumerator DamageCoroutine;
+    IEnumerator HealthCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        //PlayerColor = Color.black;
-        //childrenComponents = gameObject.GetComponentsInChildren<GameObject>();
         fadeSpeed = 1;
         PaintManager = PaintManager.Instance();
         health = maxHealth;
         stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine.Initialize();
-        damageOverlay = FindObjectOfType<Image>();
-        Debug.Log(damageOverlay);
+        damageOverlay = GameObject.FindWithTag("damage_overlay").GetComponent<Image>();
+        frontHealthBar = GameObject.FindWithTag("back_healthbar").GetComponent<Image>();
+        backHealthBar = GameObject.FindWithTag("front_healthbar").GetComponent<Image>();
+        healthText = GameObject.FindWithTag("health_text").GetComponent<TextMeshProUGUI>();
         damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 0);
     }
 
@@ -68,12 +71,11 @@ public class Player : MonoBehaviour
                     float tempAlpha = damageOverlay.color.a;
                     
                     tempAlpha -= Time.deltaTime * fadeSpeed;
-                    Debug.Log(tempAlpha);
                     damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, tempAlpha);
-                    //Debug.Log(damageOverlay.color);
                 }
             }
             UpdateHealthUI();
+            healthText.text = health + "/" + maxHealth;
         }
     }
 
@@ -88,7 +90,6 @@ public class Player : MonoBehaviour
             backHealthBar.color = Color.red;
             lerpTimer += Time.deltaTime;
             float percentComplete = lerpTimer / chipSpeed;
-            percentComplete *= percentComplete;
             backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
         }
         if (fillFront < healthFraction) // we have been healed
@@ -97,7 +98,6 @@ public class Player : MonoBehaviour
             backHealthBar.color = Color.green;
             lerpTimer += Time.deltaTime;
             float percentComplete = lerpTimer / chipSpeed;
-            percentComplete *= percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, healthFraction, percentComplete);
         }
     }
@@ -115,17 +115,14 @@ public class Player : MonoBehaviour
         if (health <= 0 && !IsDead)
         {
             PlayerDeath();
-            //StopTakeConstantDamage();
         }
-        //Debug.Log(health);
     }
 
     public void RestoreHealth(float heal)
     {
         health += heal;
         health = Mathf.Clamp(health, 0, maxHealth);
-        lerpTimer = 0;
-        //Debug.Log(health);
+        lerpTimer = 0f;
     }
 
     public void StartTakeConstantDamage()
@@ -144,12 +141,16 @@ public class Player : MonoBehaviour
 
     public void StartRestoreConstantHealth()
     {
-        StartCoroutine(RestoreConstantHealth());
+        HealthCoroutine = RestoreConstantHealth();
+        StartCoroutine(HealthCoroutine);
     }
 
     public void StopRestoreConstantHealth()
     {
-        StopCoroutine(RestoreConstantHealth());
+        if (HealthCoroutine != null)
+        {
+            StopCoroutine(HealthCoroutine);
+        }
     }
 
     IEnumerator TakeConstantDamage()
@@ -184,7 +185,6 @@ public class Player : MonoBehaviour
     {
         IsDead = true;
         StartCoroutine(DeathCoroutine());
-        //stateMachine.ChangeState(new PlayerNothingState());
         foreach (Transform child in transform)
         {
             switch (child.gameObject.name)
@@ -222,10 +222,6 @@ public class Player : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
         }
-        //foreach (GameObject gameObject in childrenComponents)
-        //{
-        //    gameObject.SetActive(true);
-        //}
         health = maxHealth;
         stateMachine.ChangeState(new PlayerNothingState());
         gameObject.GetComponent<WeaponHolder>().GetCurrentWeapon().FullReload();

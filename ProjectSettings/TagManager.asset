@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - DeactivateOnDeath
+  - damage_overlay
+  - back_healthbar
+  - front_healthbar
+  - health_text
+  - back_amunitionbar
+  - front_amunitionbar
+  - text_amunitionbar
   layers:
   - Default
   - TransparentFX

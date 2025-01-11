@@ -14,7 +14,6 @@ public class PlayerBuilder : MonoBehaviour
     {
         if (currentlyBuiltPlayer != null)
         {
-            //Destroy(currentlyBuiltPlayer.gameObject);
             currentlyBuiltPlayer = null;
         }
         // Instantiate the prefab
