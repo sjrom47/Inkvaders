@@ -72,9 +72,7 @@ public class Team : MonoBehaviour
     }
 
     void CreatePlayableCharacter(Vector3 spawnPosition)
-    {
-        // TODO: check if the input manager can be searched with GetComponent
-        Debug.Log((spawnPosition, cinemachineCamera));
+    {   
         builder.StartCreatingPlayer(spawnPosition);
         builder.AddCamera2Player(cinemachineCamera);
         builder.AddInputManager(inputManager);

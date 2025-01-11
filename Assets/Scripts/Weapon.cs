@@ -85,7 +85,6 @@ public class Weapon : MonoBehaviour
     }
     public void Shoot()
     {
-        Debug.Log(shotCommand);
         if (amunition > 0)
         {
             shootingCoroutine = RemoveAmunition();

@@ -36,17 +36,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         //saveDataHandler = SaveDataHandler.Instance();
         //saveDataHandler.LoadSaveData();
         // Done like this so we can add more containers without modyfying the class (open-close)
-        containerLoaders = new Dictionary<string, IContainerLoader>() { {"Weapon", new WeaponLoader() } };
+        containerLoaders = new Dictionary<string, IContainerLoader>() { {"Weapons", new WeaponLoader() } };
 
         infoContainers = FindObjectsOfType<MonoBehaviour>().OfType<InformationContainer>().ToList();
-        Debug.LogWarning(infoContainers);
-        Debug.LogWarning(infoContainers.Count);
         foreach (InformationContainer container in infoContainers)
         {
             
             if (container is InformationContainer infoContainer)
             {
                 string tag = infoContainer.ContentTag;
+                Debug.Log(tag);
                 if (containerLoaders.ContainsKey(tag))
                 {
                     containerLoaders[tag].LoadInformationContainer(container);
@@ -62,6 +61,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         // create the teams
         playerTeam = Instantiate(team).GetComponent<Team>();
         playerTeam.SetTeamColor(playerTeamColor);
+        playerTeam.Members = membersPerTeam;
         Debug.Log(chosenWeapon);
         playerTeam.SetTeamWeapon(chosenWeapon);
         playerTeam.SetCinemachine(cinemachineCamera);
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
         enemyTeam = Instantiate(team).GetComponent<Team>();
         enemyTeam.SetTeamColor(enemyTeamColor);
+        enemyTeam.Members = membersPerTeam;
         enemyTeam.SetTeamWeapon(chosenWeapon);
         enemyTeam.SetCinemachine(cinemachineCamera);
         enemyTeam.SetPaths(paths);
@@ -95,7 +96,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         // show the text
         ShowWinner?.Invoke(message);
         timer.OnGameEnd -= OnGameEnd;
+        foreach (InformationContainer container in infoContainers)
+        {
+            Destroy(container.gameObject);
+        }
         StartCoroutine(LoadMenuCoroutine());
+        
         //SceneManager.LoadScene("Menu");
     }
     IEnumerator LoadMenuCoroutine()

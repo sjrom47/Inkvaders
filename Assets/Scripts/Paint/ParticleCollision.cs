@@ -49,7 +49,6 @@ public class ParticleCollision : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player != null && player.PlayerColor != PaintColor)
         {
-            Debug.LogError("Algo");
             player.TakeDamage(1f);
         }
     }

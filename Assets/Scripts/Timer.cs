@@ -10,9 +10,11 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
     public float TimeLeft { get; set; }
     public event Action OnGameEnd;
+    GameManager manager;
     void Awake()
     {
-        GameManager.Instance().OnGameStart += OnGameStart;
+        manager = GameManager.Instance();
+        manager.OnGameStart += OnGameStart;
     }
 
     void OnGameStart()
@@ -40,7 +42,10 @@ public class Timer : MonoBehaviour
     }
     private void OnDisable()
     {
-        GameManager.Instance().OnGameStart -= OnGameStart;
+        if (manager != null)
+        {
+            manager.OnGameStart -= OnGameStart;
+        }
     }
     // Update is called once per frame
     void Update()

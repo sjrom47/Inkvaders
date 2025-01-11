@@ -43,11 +43,11 @@ public class ButtonGroupLogic : MonoBehaviour
     void SetChosenWeapon(int index)
     {
         WeaponButton weaponButton = buttons[index].GetComponent<WeaponButton>();
-
-        if (weaponButton != null && weaponButton.WeaponPrefab != null)
+        
+        if (weaponButton != null && weaponButton.GetWeaponPrefab() != null)
         {
-            Debug.Log("Container created");
-            menuContainer.Content = weaponButton.WeaponPrefab; 
+            
+            menuContainer.Content = weaponButton.GetWeaponPrefab(); 
         }
         
     }
