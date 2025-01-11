@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        //Debug.Log("Va a devolver false");
+        
         return false;
     }
 }

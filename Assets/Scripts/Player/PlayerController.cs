@@ -31,18 +31,9 @@ public class PlayerController : BaseController
     void Awake()
     {
         base.Awake();
-        //jumpCommand = new JumpCommand(movePlayer);
         lastShootingValue = false;
         weaponHolder = GetComponent<WeaponHolder>();
-        //GameObject player = transform.Find("LookingOrientation/JellyFishGirl").gameObject;
-        //GameObject playerHitbox = transform.Find("LookingOrientation/CharacterHitbox").gameObject;
-        //GameObject squid = transform.Find("LookingOrientation/Squid_LOD2").gameObject;
-        //GameObject squidHitbox = transform.Find("LookingOrientation/SquidHitbox").gameObject;
-        //if (player == null || playerHitbox == null || squid == null || squidHitbox == null)
-        //{
-        //    Debug.LogError("One or more GameObjects not found in hierarchy!", this);
-        //    return;
-        //}
+        
         squidTransformCommand = new SquidTransformCommand(player,playerHitbox,squid,squidHitbox);
         playerComponent = GetComponent<Player>();
         playerComponent.StartReloading += StartReloading;
