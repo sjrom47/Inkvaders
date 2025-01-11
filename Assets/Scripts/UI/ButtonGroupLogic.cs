@@ -28,6 +28,7 @@ public class ButtonGroupLogic : MonoBehaviour
         // Optionally select the first button by default
         if (buttons.Length > 0)
         {
+            SetChosenWeapon(0);
             SelectButton(0);
         }
         
