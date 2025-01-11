@@ -12,9 +12,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField] List<Path> paths;
     [SerializeField] GameObject cinemachineCamera;
     [SerializeField] float gameLength;
+    [SerializeField] Color playerTeamColor;
+    [SerializeField] Color enemyTeamColor;
+    [SerializeField] Timer timer;
+    [SerializeField] Transform playerSpawn;
+    [SerializeField] Transform enemySpawn;
+    [SerializeField] GameObject team;
     //SaveDataHandler saveDataHandler;
+
+
     GameObject chosenWeapon;
-    Timer timer;
     Team playerTeam;
     Team enemyTeam;
     Dictionary<string, IContainerLoader> containerLoaders;
@@ -25,7 +32,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         // Don't have time for this
         //saveDataHandler = SaveDataHandler.Instance();
         //saveDataHandler.LoadSaveData();
-        // done like this so we can add more containers without modyfying the class (open-close)
+        // Done like this so we can add more containers without modyfying the class (open-close)
         containerLoaders = new Dictionary<string, IContainerLoader>() { {"Weapon", new WeaponLoader() } };
 
         List<IInformationContainer> infoContainers = FindObjectsOfType<MonoBehaviour>().OfType<IInformationContainer>().ToList();
@@ -40,12 +47,25 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
                 }
             }
         }
-        // TODO: create the teams
-        timer = GetComponent<Timer>();
+        
+        // Timer created
+        
         timer.TimeLeft = gameLength;
         timer.OnGameEnd += OnGameEnd;
-        
-        
+
+        // create the teams
+        playerTeam = Instantiate(team).GetComponent<Team>();
+        playerTeam.SetTeamColor(playerTeamColor);
+        playerTeam.SetTeamWeapon(chosenWeapon);
+        playerTeam.createTeamMembers(true, playerSpawn.position, cinemachineCamera, paths);
+
+        enemyTeam = Instantiate(team).GetComponent<Team>();
+        enemyTeam.SetTeamColor(enemyTeamColor);
+        enemyTeam.SetTeamWeapon(chosenWeapon);
+        enemyTeam.createTeamMembers(false, enemySpawn.position, cinemachineCamera, paths);
+
+
+
     }
     private void Start()
     {
@@ -65,6 +85,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         string message = winningTeam == playerTeam ? "You won this battle" : "You lost this battle";
         // show the text
         ShowWinner?.Invoke(message);
+        SceneManager.LoadScene("Menu");
     }
 
     public void SetChosenWeapon(GameObject chosenWeapon)

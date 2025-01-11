@@ -16,7 +16,7 @@ public class Team : MonoBehaviour
     int members = 3;
     public int Members { get { return members; } set { members = value; } }
 
-    void Start()
+    void Awake()
     {
         teamMembers = new List<Player>();
         builder = GetComponent<PlayerBuilder>();
@@ -36,10 +36,11 @@ public class Team : MonoBehaviour
         return color;
     }
 
-    void createTeamMembers(bool hasPlayablePlayer, Vector3 spawnPosition, GameObject cinemachineCamera, List<Path> paths) 
+    public void createTeamMembers(bool hasPlayablePlayer, Vector3 spawnPosition, GameObject cinemachineCamera, List<Path> paths) 
     {
         if (hasPlayablePlayer) 
         {
+            
             CreatePlayableCharacter(spawnPosition, cinemachineCamera);
         }
         for (int i = 0; i < (hasPlayablePlayer ? members - 1 : members); i++)
