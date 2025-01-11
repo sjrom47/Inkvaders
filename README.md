@@ -11,6 +11,10 @@ A multiplayer shooter game inspired by Splatoon, developed as a final project. P
   - [Future Development 🔮](#future-development-)
   - [Development Team 👨‍💻](#development-team-)
 
+
+https://github.com/user-attachments/assets/a336d9fd-ba9c-4dff-a48a-4cbb0fd383be
+
+
 ## Features ✨
 
 - **Team-based Gameplay**: Configurable team sizes (default: 3v3)
