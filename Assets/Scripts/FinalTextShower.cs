@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FinalTextShower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] TextMeshProUGUI winnerText;
+
+    private void Awake()
     {
-        
+        winnerText.text = "";
+        GameManager.Instance().ShowWinner += ShowWinner;
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance().ShowWinner -= ShowWinner;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ShowWinner(string message)
     {
-        
+        winnerText.text = message;
     }
 }

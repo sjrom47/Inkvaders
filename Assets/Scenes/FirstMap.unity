@@ -8371,10 +8371,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5689854e43c3d984b9b7e2a9de9b318e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  membersPerTeam: 0
+  membersPerTeam: 3
   paths: []
-  cinemachineCamera: {fileID: 0}
-  gameLength: 0
+  cinemachineCamera: {fileID: 1974406911}
+  gameLength: 20
+  playerTeamColor: {r: 0.082237005, g: 1, b: 0, a: 1}
+  enemyTeamColor: {r: 1, g: 0, b: 0.9655819, a: 1}
+  timer: {fileID: 1837918416}
+  playerSpawn: {fileID: 1748153367}
+  enemySpawn: {fileID: 1544225922}
+  team: {fileID: 271364759}
 --- !u!4 &960412900
 Transform:
   m_ObjectHideFlags: 0
@@ -25316,6 +25322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1543699862}
+  - component: {fileID: 1543699863}
   m_Layer: 5
   m_Name: FinalText
   m_TagString: Untagged
@@ -25343,6 +25350,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1543699863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543699861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afb038103beef0419aaeaf31a85f725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winnerText: {fileID: 94853375}
 --- !u!1 &1544225920
 GameObject:
   m_ObjectHideFlags: 0
@@ -27667,6 +27687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1837918415}
+  - component: {fileID: 1837918416}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -27694,6 +27715,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1837918416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837918414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58c7aeadbf16004ba9cba93e821f168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshProUGUI: {fileID: 0}
 --- !u!1001 &1842615317
 PrefabInstance:
   m_ObjectHideFlags: 0
