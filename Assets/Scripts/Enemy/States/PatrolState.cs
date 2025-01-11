@@ -29,7 +29,7 @@ public class PatrolState : BaseEnemyState
     {
 
     }
-    public void PatrolCycle()
+    private void PatrolCycle()
     {
         if (enemy.Agent.remainingDistance < 0.2f && enemy.PlayerController != null)
         {
