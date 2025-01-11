@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class ButtonGroupLogic : MonoBehaviour
     
     private Button[] buttons;
     private int selectedButtonIndex = -1;
+    private InformationContainer<GameObject> menuContainer;
 
     void Start()
     {
@@ -21,12 +23,14 @@ public class ButtonGroupLogic : MonoBehaviour
             int buttonIndex = i; // Preserve the index for the lambda
             buttons[i].onClick.AddListener(() => OnButtonClick(buttonIndex));
         }
-
+        menuContainer = GetComponent<InformationContainer<GameObject>>();
+        menuContainer.ContentTag = gameObject.name;
         // Optionally select the first button by default
         if (buttons.Length > 0)
         {
             SelectButton(0);
         }
+        
     }
 
     void OnButtonClick(int index)
@@ -41,7 +45,7 @@ public class ButtonGroupLogic : MonoBehaviour
 
         if (weaponButton != null && weaponButton.WeaponPrefab != null)
         {
-            GameManager.Instance().ChangeChosenWeapon(weaponButton.WeaponPrefab); 
+            menuContainer.Content = weaponButton.WeaponPrefab; 
         }
         
     }

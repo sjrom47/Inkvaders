@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
         StopCoroutine(RestoreConstantHealth());
     }
 
-    public IEnumerator TakeConstantDamage()
+    IEnumerator TakeConstantDamage()
     {
         while (true)
         {
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator RestoreConstantHealth()
+    IEnumerator RestoreConstantHealth()
     {
         while (true)
         {
