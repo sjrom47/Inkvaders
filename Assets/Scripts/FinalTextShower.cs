@@ -6,15 +6,20 @@ using UnityEngine;
 public class FinalTextShower : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI winnerText;
+    GameManager gameManager;
 
     private void Awake()
     {
+        gameManager = GameManager.Instance();
         winnerText.text = "";
-        GameManager.Instance().ShowWinner += ShowWinner;
+        gameManager.ShowWinner += ShowWinner;
     }
     private void OnDisable()
     {
-        GameManager.Instance().ShowWinner -= ShowWinner;
+        if (gameManager != null)
+        {
+            gameManager.ShowWinner -= ShowWinner;
+        }
     }
 
     private void ShowWinner(string message)

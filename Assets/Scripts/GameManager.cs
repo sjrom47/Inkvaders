@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             {
                 string tag = infoContainer.ContentTag;
                 Debug.Log(tag);
-                if (containerLoaders.ContainsKey(tag))
+                if (tag!=null && containerLoaders.ContainsKey(tag))
                 {
                     containerLoaders[tag].LoadInformationContainer(container);
                 }
