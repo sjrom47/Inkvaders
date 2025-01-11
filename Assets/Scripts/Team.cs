@@ -65,7 +65,7 @@ public class Team : MonoBehaviour
         {
             //TODO: modify spawn position slightly for AI based on index
             Path path = paths[i];
-            Vector3 newSpawnPosition = new Vector3(spawnPosition.x + Mathf.Pow(-1,i)*10*(float)(int)(i/2), spawnPosition.y, spawnPosition.z);
+            Vector3 newSpawnPosition = new Vector3(spawnPosition.x + Mathf.Pow(-1,i)*2*((float)(int)(i/2)+1), spawnPosition.y, spawnPosition.z);
 
             CreateAIPlayer(newSpawnPosition, path);
         }
