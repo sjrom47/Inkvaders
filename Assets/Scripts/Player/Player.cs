@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     // Health
     private float health;
     public float maxHealth;
+    public bool IsDead { get; private set; }
 
     // Damage Overlay
     public Image damageOverlay;
@@ -28,11 +30,14 @@ public class Player : MonoBehaviour
     public bool isTakingDamage = false;
 
     private PlayerStateMachine stateMachine;
+    GameObject[] childrenComponents;
+    IEnumerator DamageCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
         //PlayerColor = Color.black;
+        //childrenComponents = gameObject.GetComponentsInChildren<GameObject>();
         PaintManager = PaintManager.Instance();
         health = maxHealth;
         stateMachine = GetComponent<PlayerStateMachine>();
@@ -69,6 +74,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             PlayerDeath();
+            //StopTakeConstantDamage();
         }
         Debug.Log(health);
     }
@@ -82,12 +88,16 @@ public class Player : MonoBehaviour
 
     public void StartTakeConstantDamage()
     {
-        StartCoroutine(TakeConstantDamage());
+        DamageCoroutine = TakeConstantDamage();
+        StartCoroutine(DamageCoroutine);
     }
 
     public void StopTakeConstantDamage()
     {
-        StopCoroutine(TakeConstantDamage());
+        if (DamageCoroutine != null)
+        {
+            StopCoroutine(DamageCoroutine);
+        }
     }
 
     public void StartRestoreConstantHealth()
@@ -100,7 +110,7 @@ public class Player : MonoBehaviour
         StopCoroutine(RestoreConstantHealth());
     }
 
-    public IEnumerator TakeConstantDamage()
+    IEnumerator TakeConstantDamage()
     {
         while (true)
         {
@@ -109,7 +119,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator RestoreConstantHealth()
+    IEnumerator RestoreConstantHealth()
     {
         while (true)
         {
@@ -130,15 +140,54 @@ public class Player : MonoBehaviour
 
     void PlayerDeath()
     {
-        gameObject.SetActive(false);
+        IsDead = true;
         StartCoroutine(DeathCoroutine());
+        //stateMachine.ChangeState(new PlayerNothingState());
+        foreach (Transform child in transform)
+        {
+            switch (child.gameObject.name)
+            {
+                case "JellyFishGirl":
+                    child.gameObject.SetActive(false);
+                    break;
+                case "CharacterHitbox":
+                    child.gameObject.SetActive(true);
+                    break;
+                case "SquidHitbox":
+                    child.gameObject.SetActive(false);
+                    break;
+                case "Squid_LOD2":
+                    child.gameObject.SetActive(false);
+                    break;
+                default:
+                    Debug.Log(child.GetType().Name);
+                    break;
+            }
+            // Deactivate the child GameObject
+            
+        }
     }
 
     IEnumerator DeathCoroutine()
     {
+        Debug.Log("Started Death time");
         yield return new WaitForSeconds(deathTime);
         gameObject.transform.position = SpawnPoint;
-        gameObject.SetActive(true);
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.name == "JellyFishGirl")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+        //foreach (GameObject gameObject in childrenComponents)
+        //{
+        //    gameObject.SetActive(true);
+        //}
         health = maxHealth;
+        stateMachine.ChangeState(new PlayerNothingState());
+        gameObject.GetComponent<WeaponHolder>().GetCurrentWeapon().FullReload();
+        IsDead = false;
+        Debug.Log("Finished death cor");
     }
 }

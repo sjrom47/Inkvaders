@@ -13,6 +13,7 @@ public class DamageState : PlayerBaseState
     public override void Perform()
     {
         Color floorColor = player.PaintManager.GetColorOfFloor(player.transform.position);
+        //Debug.Log(floorColor);
 
         if (player.IsSquid && ColorChecker.ColorsAreClose(floorColor, player.PlayerColor))
         {

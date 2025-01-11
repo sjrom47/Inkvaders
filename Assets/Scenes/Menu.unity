@@ -151,6 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5689854e43c3d984b9b7e2a9de9b318e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  membersPerTeam: 0
+  paths: []
+  cinemachineCamera: {fileID: 0}
+  gameLength: 0
 --- !u!4 &26963645
 Transform:
   m_ObjectHideFlags: 0
@@ -1978,7 +1982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9a4465b935aac4a8da2b8e13752a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 6795203743390542691, guid: ad9d776149382bd43a5f16fd2339c07d, type: 3}
 --- !u!1001 &1279015399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3002,7 +3006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9a4465b935aac4a8da2b8e13752a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 474721996200746511, guid: 35ea3e80a08ef4c45bf44a5d15c84b91, type: 3}
 --- !u!1 &1722014632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7749642915561297222, guid: 747747e7179f1984da47569b87df9d7c, type: 3}
@@ -3020,7 +3024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9a4465b935aac4a8da2b8e13752a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 5133690205613065959, guid: 148bffbc61838b049b84b8ca0b3a4412, type: 3}
 --- !u!1 &1922079441
 GameObject:
   m_ObjectHideFlags: 0
