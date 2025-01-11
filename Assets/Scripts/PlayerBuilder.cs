@@ -99,6 +99,8 @@ public class PlayerBuilder : MonoBehaviour
         // Attach the provided InputManager instance to the player
         inputManager = currentlyBuiltPlayer.gameObject.AddComponent(inputManager.GetType()) as InputManager;
         inputManager.SetPlayerController(playerController);
+
+        currentlyBuiltPlayer.tag = "Player";
     }
 
     
@@ -140,7 +142,7 @@ public class PlayerBuilder : MonoBehaviour
 
         navMeshAgent.radius = 0.4f;
         navMeshAgent.height = 2;
-        navMeshAgent.speed = 10;
+        navMeshAgent.speed = 8;
         navMeshAgent.acceleration = 5;
         navMeshAgent.angularSpeed = 170;
         navMeshAgent.autoBraking = true;

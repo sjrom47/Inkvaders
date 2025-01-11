@@ -20,6 +20,7 @@ public class PlayerCreationTest : MonoBehaviour
         for (int i = 0; i < nBots; i++) 
         {
             BuildTestEnemy(new Vector3(48, 0, -21.5f));
+            //BuildTestEnemy(new Vector3(60, 0, -18));
         }
         for (int i = 0; i < nPlayers; i++)
         {

@@ -43,12 +43,13 @@ public class ParticleCollision : MonoBehaviour
                 Vector3 pos = collisionEvents[i].intersection;
                 Vector3 normalVector = collisionEvents[i].normal;
                 float radius = Random.Range(minRadius, maxRadius);
-                PaintManager.Instance().PaintSurface(paintedSurface, pos, normalVector, radius, paintColor);
+                //PaintManager.Instance().PaintSurface(paintedSurface, pos, normalVector, radius, paintColor);
             }
         }
         Player player = other.GetComponent<Player>();
         if (player != null && player.PlayerColor != PaintColor)
         {
+            Debug.LogError("Algo");
             player.TakeDamage(1f);
         }
     }
