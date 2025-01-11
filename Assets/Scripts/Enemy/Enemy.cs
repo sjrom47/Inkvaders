@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     private UnityEngine.Object[] enemyTeamPlayers;
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
+    public Color color;
+    public Player lastSeenEnemyPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class Enemy : MonoBehaviour
     {
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
-        Debug.Log(currentState);
+        Debug.LogError(currentState);
     }
 
     public bool CanSeePlayer()
@@ -41,35 +43,30 @@ public class Enemy : MonoBehaviour
         // any player?
         if (enemyTeamPlayers != null)
         {
-            //Debug.Log("No son null");
             foreach (Player player in enemyTeamPlayers)
             {
-                //Debug.Log(player.transform.position);
-                // player close enough?
-                if (Vector3.Distance(transform.position, player.transform.position) < sightDistance)
+                if (player.PlayerColor != color) 
                 {
-                    Vector3 targetDirection = player.transform.position - transform.position + Vector3.up*0.1f;
-
-                    Debug.Log(targetDirection);
-                    float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
-                    Debug.Log(angleToPlayer);
-                    // player in field of view?
-                    if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+                    // player close enough?
+                    if (Vector3.Distance(transform.position, player.transform.position) < sightDistance)
                     {
-                        Debug.Log("Se debería ver");
-                        Ray ray = new Ray(transform.position, targetDirection);
-                        RaycastHit hitInfo = new RaycastHit();
-                        // any obstacle between player and enemy?
-                        if (Physics.Raycast(ray, out hitInfo, sightDistance))
+                        Vector3 targetDirection = player.transform.position - transform.position + Vector3.up * 0.1f;
+                        float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
+                        // player in field of view?
+                        if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
                         {
-                            //Debug.Log("Se ve");
-                            if (hitInfo.transform.gameObject == player && hitInfo.transform.gameObject != this)
+                            Ray ray = new Ray(transform.position, targetDirection);
+                            RaycastHit hitInfo = new RaycastHit();
+                            // any obstacle between player and enemy?
+                            if (Physics.Raycast(ray, out hitInfo, sightDistance))
                             {
-                                //Debug.Log("Se devuelve");
-                                return true;
+                                if (hitInfo.transform.gameObject.GetComponent<Player>() == player)
+                                {
+                                    lastSeenEnemyPlayer = player;
+                                    return true;
+                                }
                             }
                         }
-                        Debug.DrawRay(ray.origin, ray.direction * sightDistance);
                     }
                 }
             }

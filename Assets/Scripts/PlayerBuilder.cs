@@ -162,6 +162,7 @@ public class PlayerBuilder : MonoBehaviour
         }
 
         enemy.path = path;
+        enemy.color = currentlyBuiltPlayer.PlayerColor;
     }
 
     public Player BuildPlayer()

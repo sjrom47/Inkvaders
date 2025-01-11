@@ -418,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &83396694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   inputManager: {fileID: 2135955149}
   color: {r: 0, g: 0.11850643, b: 1, a: 0}
   cinemachineCamera: {fileID: 190754362}
-  path: {fileID: 354909097}
+  path: {fileID: 36966725}
   nBots: 1
   nPlayers: 0
 --- !u!1 &90293665 stripped
@@ -826,6 +826,7 @@ MonoBehaviour:
   path: {fileID: 0}
   sightDistance: 20
   fieldOfView: 85
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &165322549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3930,6 +3931,7 @@ MonoBehaviour:
   path: {fileID: 0}
   sightDistance: 20
   fieldOfView: 85
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!195 &648606306
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4240,6 +4242,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 36966724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &666513254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666513257}
+  - component: {fileID: 666513256}
+  - component: {fileID: 666513255}
+  m_Layer: 0
+  m_Name: PlayerBuilder (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &666513255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666513254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79516d4788f8ec14b83974dfcaae65a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 2111539454}
+  inputManager: {fileID: 2135955149}
+  color: {r: 0, g: 0.11850643, b: 1, a: 0}
+  cinemachineCamera: {fileID: 190754362}
+  path: {fileID: 498873211}
+  nBots: 1
+  nPlayers: 0
+--- !u!114 &666513256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666513254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455b99ae96413f448b2df823575f338f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 1996315722}
+--- !u!4 &666513257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666513254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 42.623566, y: 0, z: -29.37017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667423768 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5418299342752462037, guid: 2d1aed8ada79e4d4e99084037c3b094a, type: 3}
@@ -4493,7 +4560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &729662573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4510,7 +4577,7 @@ MonoBehaviour:
   inputManager: {fileID: 2135955149}
   color: {r: 1, g: 0.5665202, b: 0, a: 0}
   cinemachineCamera: {fileID: 190754362}
-  path: {fileID: 36966725}
+  path: {fileID: 354909097}
   nBots: 1
   nPlayers: 0
 --- !u!114 &729662574
@@ -7111,7 +7178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1299183977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8948,6 +9015,7 @@ MonoBehaviour:
   path: {fileID: 0}
   sightDistance: 20
   fieldOfView: 85
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1629303091
 Transform:
   m_ObjectHideFlags: 0
@@ -9402,7 +9470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1706912885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11274,10 +11342,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.99
       objectReference: {fileID: 0}
-    - target: {fileID: 344234970380691997, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
-      propertyPath: m_TagString
-      value: DeactivateOnDeath
-      objectReference: {fileID: 0}
     - target: {fileID: 812769227117502504, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
       propertyPath: m_Name
       value: PlayableCharacter
@@ -11293,10 +11357,6 @@ PrefabInstance:
     - target: {fileID: 3509167551067908870, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3509167551068223506, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
-      propertyPath: m_TagString
-      value: DeactivateOnDeath
       objectReference: {fileID: 0}
     - target: {fileID: 4460135475697936051, guid: 0336787defeb4d146a6f6d0e9938426b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12221,6 +12281,7 @@ SceneRoots:
   - {fileID: 322627000}
   - {fileID: 83396695}
   - {fileID: 1299183979}
+  - {fileID: 666513257}
   - {fileID: 1706912887}
   - {fileID: 729662575}
   - {fileID: 2135955150}
